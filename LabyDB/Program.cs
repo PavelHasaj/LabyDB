@@ -11,6 +11,7 @@ namespace LabyDB {
         /// </summary>
         public static Form1 form1 = new Form1();
         public static Form2 form2 = new Form2();
+        public static Form3 form3 = new Form3();
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();
