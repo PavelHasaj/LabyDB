@@ -7,7 +7,7 @@ namespace LabyDB {
         public Form2() {
             InitializeComponent();
         }
-        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\feedf\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True");
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
 
