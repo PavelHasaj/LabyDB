@@ -110,5 +110,9 @@ namespace LabyDB {
         {
             DatabaseUpdate();
         }
+
+        private void show_name(object sender, EventArgs e) {
+            button7.Text = Program.UserName;
+        }
     }
 }
