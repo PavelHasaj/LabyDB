@@ -323,7 +323,7 @@ namespace LabyDB
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource sampleDatabaseDataSetBindingSource;
-        private SampleDatabaseDataSet sampleDatabaseDataSet;
+        private SampleDatabaseDataSet1 sampleDatabaseDataSet;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.BindingSource sampleDatabaseDataSetBindingSource1;
         private System.Windows.Forms.TextBox textBox4;

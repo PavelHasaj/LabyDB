@@ -9,7 +9,7 @@ namespace LabyDB {
         }
         SqlConnection connection = new SqlConnection(Program.ConnectionString);
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
-        SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
+        SampleDatabaseDataSet1 dataSet = new SampleDatabaseDataSet1();
 
         private void DatabaseUpdate() {
             dataGridView1.DataSource = null;
@@ -109,10 +109,6 @@ namespace LabyDB {
         private void button8_Click(object sender, EventArgs e)
         {
             DatabaseUpdate();
-        }
-
-        private void show_name(object sender, EventArgs e) {
-            button7.Text = Program.UserName;
         }
     }
 }
