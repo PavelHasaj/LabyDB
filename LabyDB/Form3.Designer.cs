@@ -39,7 +39,7 @@ namespace LabyDB
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.sampleDatabaseDataSet = new LabyDB.SampleDatabaseDataSet();
+            this.sampleDatabaseDataSet = new LabyDB.SampleDatabaseDataSet1();
             this.sampleDatabaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.sampleDatabaseDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);

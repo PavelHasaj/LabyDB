@@ -41,7 +41,7 @@ namespace LabyDB
 
         SqlConnection connection = new SqlConnection(Program.ConnectionString);
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
-        SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
+        SampleDatabaseDataSet1 dataSet = new SampleDatabaseDataSet1();
 
         private void DatabaseUpdate()
         {
