@@ -136,5 +136,10 @@ namespace LabyDB
             umn = b * c;
             textBox5.Text = Convert.ToString(umn);
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
