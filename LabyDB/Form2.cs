@@ -7,7 +7,7 @@ namespace LabyDB {
         public Form2() {
             InitializeComponent();
         }
-        SqlConnection connection = new SqlConnection(Program.ConnectionString);
+        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\feedf\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True");
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
 
@@ -104,15 +104,6 @@ namespace LabyDB {
         {
             Program.form3.Show();
             this.Hide();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            DatabaseUpdate();
-        }
-
-        private void show_name(object sender, EventArgs e) {
-            button7.Text = Program.UserName;
         }
     }
 }
