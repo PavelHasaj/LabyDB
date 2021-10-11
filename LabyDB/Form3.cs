@@ -39,7 +39,7 @@ namespace LabyDB
             this.Hide();
         }
 
-        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\feedf\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True");
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
 
@@ -89,9 +89,9 @@ namespace LabyDB
             dataSet.Clear();
             connection.Open();
 
-            command.Parameters.AddWithValue("@MonthOfPayment", textBox2.Text);
-            command.Parameters.AddWithValue("@Tariff", textBox3.Text);
-            command.Parameters.AddWithValue("@NumberOfKilowatts", textBox4.Text);
+            command.Parameters.AddWithValue("@MonthOfPayment", Convert.ToDateTime(textBox2.Text));
+            command.Parameters.AddWithValue("@Tariff", Convert.ToDouble(textBox3.Text));
+            command.Parameters.AddWithValue("@NumberOfKilowatts", Convert.ToInt32(textBox4.Text));
 
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(dataSet);
@@ -135,6 +135,11 @@ namespace LabyDB
             c = Convert.ToDouble(dataGridView1[3, j].Value);
             umn = b * c;
             textBox5.Text = Convert.ToString(umn);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
