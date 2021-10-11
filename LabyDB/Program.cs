@@ -9,6 +9,9 @@ namespace LabyDB {
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
+
+        public static string ConnectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\" + Environment.UserName + "\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True";
+
         public static Form1 form1 = new Form1();
         public static Form2 form2 = new Form2();
         public static Form3 form3 = new Form3();
