@@ -93,5 +93,17 @@ namespace LabyDB {
             Program.form1.Show();
             this.Hide();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Program.form1.Show();
+            this.Hide();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Program.form3.Show();
+            this.Hide();
+        }
     }
 }
