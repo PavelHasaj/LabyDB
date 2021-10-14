@@ -37,18 +37,29 @@ namespace LabyDB {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.sampleDatabaseDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
+            this.sampleDatabaseDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(276, 12);
+            this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridView1.Location = new System.Drawing.Point(364, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(424, 211);
+            this.dataGridView1.Size = new System.Drawing.Size(424, 397);
             this.dataGridView1.TabIndex = 0;
             // 
             // sampleDatabaseDataSet
@@ -63,23 +74,26 @@ namespace LabyDB {
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox1.Location = new System.Drawing.Point(140, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(130, 20);
+            this.textBox1.Size = new System.Drawing.Size(218, 20);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox2.Location = new System.Drawing.Point(140, 38);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(130, 20);
+            this.textBox2.Size = new System.Drawing.Size(218, 20);
             this.textBox2.TabIndex = 1;
             // 
             // textBox3
             // 
+            this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.textBox3.Location = new System.Drawing.Point(140, 64);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(130, 20);
+            this.textBox3.Size = new System.Drawing.Size(218, 20);
             this.textBox3.TabIndex = 1;
             // 
             // label1
@@ -111,50 +125,106 @@ namespace LabyDB {
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 90);
+            this.button1.BackColor = System.Drawing.SystemColors.Window;
+            this.button1.Location = new System.Drawing.Point(202, 90);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.add_button);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 119);
+            this.button2.BackColor = System.Drawing.SystemColors.Window;
+            this.button2.Location = new System.Drawing.Point(121, 90);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
             this.button2.Text = "Изменить";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.data_change_button);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(93, 90);
+            this.button3.BackColor = System.Drawing.SystemColors.Window;
+            this.button3.Location = new System.Drawing.Point(40, 90);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
             this.button3.Text = "Удалить";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.data_delete_button);
             // 
-            // button4
+            // button6
             // 
-            this.button4.Location = new System.Drawing.Point(15, 200);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Назад";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.Form1_open_button);
+            this.button6.BackColor = System.Drawing.SystemColors.Window;
+            this.button6.Location = new System.Drawing.Point(713, 415);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 7;
+            this.button6.Text = "Вперед";
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.SystemColors.Window;
+            this.button5.Location = new System.Drawing.Point(632, 415);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "Главная";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.Window;
+            this.button7.Location = new System.Drawing.Point(551, 415);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 9;
+            this.button7.Text = "Назад";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.SystemColors.Window;
+            this.button8.Location = new System.Drawing.Point(283, 90);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 22;
+            this.button8.Text = "Обновить";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // sampleDatabaseDataSetBindingSource1
+            // 
+            this.sampleDatabaseDataSetBindingSource1.DataSource = this.sampleDatabaseDataSet;
+            this.sampleDatabaseDataSetBindingSource1.Position = 0;
+            // 
+            // sampleDatabaseDataSet1
+            // 
+            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
+            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // sampleDatabaseDataSet1BindingSource
+            // 
+            this.sampleDatabaseDataSet1BindingSource.DataSource = this.sampleDatabaseDataSet1;
+            this.sampleDatabaseDataSet1BindingSource.Position = 0;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(712, 379);
-            this.Controls.Add(this.button4);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -165,12 +235,18 @@ namespace LabyDB {
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "2 лаба";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,7 +266,13 @@ namespace LabyDB {
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.BindingSource sampleDatabaseDataSetBindingSource1;
+        private SampleDatabaseDataSet1 sampleDatabaseDataSet1;
+        private System.Windows.Forms.BindingSource sampleDatabaseDataSet1BindingSource;
     }
 }
 

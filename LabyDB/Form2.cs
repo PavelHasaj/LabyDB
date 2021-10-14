@@ -7,7 +7,7 @@ namespace LabyDB {
         public Form2() {
             InitializeComponent();
         }
-        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\user\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\feedf\source\repos\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True");
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
 
@@ -89,7 +89,25 @@ namespace LabyDB {
             DataDelete();
         }
 
-        private void Form1_open_button(object sender, EventArgs e) {
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Program.form3.Show();
+            this.Hide();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Program.form1.Show();
+            this.Hide();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
             Program.form1.Show();
             this.Hide();
         }
