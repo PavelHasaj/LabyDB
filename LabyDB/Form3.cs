@@ -139,7 +139,17 @@ namespace LabyDB
 
         private void button9_Click(object sender, EventArgs e)
         {
-            
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("Select * From Payments inner join Abonents on Payments.AbonentID = Abonents.AbonentID where Adress = @Adress", connection);
+            command_select.Parameters.AddWithValue("@Adress", textBox6.Text);
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+
         }
     }
 }
