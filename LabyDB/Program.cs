@@ -14,13 +14,15 @@ namespace LabyDB {
         public static Form3 form3 = new Form3();
         public static Form4 form4 = new Form4();
 
-        public static string ConnectionString { get; internal set; }
-
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(form1);
+        }
+
+        public static string GetConnectionString() {
+            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\" + Environment.UserName + @"\Source\Repos\PavelHasaj\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True";
         }
     }
 }
