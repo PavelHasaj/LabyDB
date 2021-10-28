@@ -172,7 +172,7 @@ namespace LabyDB
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-            SqlCommand command_select = new SqlCommand("Select Count(Payments Group by Tariff) From Payments", connection);
+            SqlCommand command_select = new SqlCommand("SELECT Tariff, COUNT(*) as count FROM Payments GROUP BY Tariff", connection);
             //SqlCommand command_select = new SqlCommand("Select * from Payments Group by Tariff", connection);
             dataAdapter.SelectCommand = command_select;
             dataAdapter.Fill(dataSet);
