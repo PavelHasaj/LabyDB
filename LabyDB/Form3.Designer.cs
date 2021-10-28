@@ -60,6 +60,8 @@ namespace LabyDB
             this.button10 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource)).BeginInit();
@@ -322,7 +324,7 @@ namespace LabyDB
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(148, 346);
+            this.label8.Location = new System.Drawing.Point(153, 346);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(129, 13);
             this.label8.TabIndex = 23;
@@ -339,12 +341,34 @@ namespace LabyDB
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(148, 375);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(136, 13);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Подсчет суммы платежа:";
+            // 
+            // button12
+            // 
+            this.button12.BackColor = System.Drawing.SystemColors.Window;
+            this.button12.Location = new System.Drawing.Point(283, 370);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(75, 23);
+            this.button12.TabIndex = 26;
+            this.button12.Text = "Узнать";
+            this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
@@ -419,5 +443,7 @@ namespace LabyDB
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button12;
     }
 }
