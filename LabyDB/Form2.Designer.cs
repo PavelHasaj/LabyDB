@@ -25,6 +25,7 @@ namespace LabyDB {
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.sampleDatabaseDataSet = new LabyDB.SampleDatabaseDataSet();
             this.sampleDatabaseDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -55,7 +56,7 @@ namespace LabyDB {
             // 
             // dataGridView1
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.AliceBlue;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridView1.Location = new System.Drawing.Point(11, 12);
@@ -75,7 +76,7 @@ namespace LabyDB {
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox1.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox1.Location = new System.Drawing.Point(116, 276);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(309, 20);
@@ -83,7 +84,7 @@ namespace LabyDB {
             // 
             // textBox2
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox2.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox2.Location = new System.Drawing.Point(116, 302);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(309, 20);
@@ -91,7 +92,7 @@ namespace LabyDB {
             // 
             // textBox3
             // 
-            this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox3.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox3.Location = new System.Drawing.Point(116, 328);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(309, 20);
@@ -126,7 +127,8 @@ namespace LabyDB {
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.Window;
+            this.button1.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Location = new System.Drawing.Point(269, 415);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -137,7 +139,8 @@ namespace LabyDB {
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.Window;
+            this.button2.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Location = new System.Drawing.Point(350, 415);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -148,7 +151,8 @@ namespace LabyDB {
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.Window;
+            this.button3.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button3.Location = new System.Drawing.Point(431, 415);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
@@ -159,7 +163,8 @@ namespace LabyDB {
             // 
             // button6
             // 
-            this.button6.BackColor = System.Drawing.SystemColors.Window;
+            this.button6.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button6.Location = new System.Drawing.Point(767, 415);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
@@ -170,7 +175,8 @@ namespace LabyDB {
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.Window;
+            this.button5.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button5.Location = new System.Drawing.Point(686, 415);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
@@ -181,7 +187,8 @@ namespace LabyDB {
             // 
             // button8
             // 
-            this.button8.BackColor = System.Drawing.SystemColors.Window;
+            this.button8.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button8.Location = new System.Drawing.Point(767, 276);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
@@ -207,7 +214,7 @@ namespace LabyDB {
             // 
             // textBox4
             // 
-            this.textBox4.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox4.BackColor = System.Drawing.SystemColors.MenuBar;
             this.textBox4.Location = new System.Drawing.Point(116, 354);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(309, 20);
@@ -226,7 +233,7 @@ namespace LabyDB {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(854, 450);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox4);
@@ -243,9 +250,11 @@ namespace LabyDB {
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form2";
+            this.Opacity = 0.95D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Владелец";
             this.Load += new System.EventHandler(this.Form1_Load);
