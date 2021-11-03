@@ -7,69 +7,67 @@ namespace LabyDB {
         public Form2() {
             InitializeComponent();
         }
+
+        //Подключение
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
 
-        private void DatabaseUpdate() {
+        //Обнавление
+        private void DatabaseUpdate(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-            SqlCommand command_select = new SqlCommand("Select * From Abonents", connection);
+            SqlCommand command_select = new SqlCommand("Select * From Owner", connection);
             dataAdapter.SelectCommand = command_select;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
 
-        void DataAdd() {
-            //добавление записи
+        //добавление записи
+        void DataAdd(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-
-            SqlCommand comand = new SqlCommand("Insert Into Abonents Values (@Nomer_licevogo_cheta, @FIO, @Adres)", connection);
-            comand.Parameters.AddWithValue("@Nomer_licevogo_cheta", textBox1.Text);
+            SqlCommand comand = new SqlCommand("Insert Into Owner Values (@Id_owner, @FIO, @Phone_number, @Driver_license_number)", connection);
+            comand.Parameters.AddWithValue("@Id_owner", Convert.ToInt64(textBox1.Text));
             comand.Parameters.AddWithValue("@FIO", textBox2.Text);
-            comand.Parameters.AddWithValue("@Adres", textBox3.Text);
-
+            comand.Parameters.AddWithValue("@Phone_number", textBox3.Text);
+            comand.Parameters.AddWithValue("@Driver_license_number", textBox4.Text);
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
-
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
 
-        void DataChange() {
-            SqlCommand command = new SqlCommand("Update Abonents set FullName=@FullName, Adress=@Adress Where AbonentID = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
+        //Изменение записи
+        void DataChange(){
+            SqlCommand command = new SqlCommand("Update Owner set FIO=@FIO, Phone_number=@Phone_number, Driver_license_number=@Driver_license_number Where Id_owner = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-
-            command.Parameters.AddWithValue("@FullName", textBox2.Text);
-            command.Parameters.AddWithValue("@Adress", textBox3.Text);
-
+            command.Parameters.AddWithValue("@FIO", textBox2.Text);
+            command.Parameters.AddWithValue("@Phone_number", textBox3.Text);
+            command.Parameters.AddWithValue("@Driver_license_number", textBox4.Text);
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
-
             DatabaseUpdate();
         }
 
-        void DataDelete() {
-            SqlCommand command = new SqlCommand("Delete From Abonents where AbonentID = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
-
+        //Удаление записи
+        void DataDelete(){
+            SqlCommand command = new SqlCommand("Delete From Owner where Id_owner = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
-
             DatabaseUpdate();
         }
 

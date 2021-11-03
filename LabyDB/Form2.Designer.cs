@@ -44,6 +44,8 @@ namespace LabyDB {
             this.sampleDatabaseDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
             this.sampleDatabaseDataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource)).BeginInit();
@@ -57,9 +59,9 @@ namespace LabyDB {
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridView1.Location = new System.Drawing.Point(364, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(11, 12);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(424, 397);
+            this.dataGridView1.Size = new System.Drawing.Size(831, 258);
             this.dataGridView1.TabIndex = 0;
             // 
             // sampleDatabaseDataSet
@@ -75,40 +77,40 @@ namespace LabyDB {
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox1.Location = new System.Drawing.Point(140, 12);
+            this.textBox1.Location = new System.Drawing.Point(116, 276);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(218, 20);
+            this.textBox1.Size = new System.Drawing.Size(309, 20);
             this.textBox1.TabIndex = 1;
             // 
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox2.Location = new System.Drawing.Point(140, 38);
+            this.textBox2.Location = new System.Drawing.Point(116, 302);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(218, 20);
+            this.textBox2.Size = new System.Drawing.Size(309, 20);
             this.textBox2.TabIndex = 1;
             // 
             // textBox3
             // 
             this.textBox3.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox3.Location = new System.Drawing.Point(140, 64);
+            this.textBox3.Location = new System.Drawing.Point(116, 328);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(218, 20);
+            this.textBox3.Size = new System.Drawing.Size(309, 20);
             this.textBox3.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(12, 279);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(122, 13);
+            this.label1.Size = new System.Drawing.Size(98, 13);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Номер лицевого счета";
+            this.label1.Text = "Номер владельца";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(100, 41);
+            this.label2.Location = new System.Drawing.Point(76, 305);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 2;
@@ -117,16 +119,16 @@ namespace LabyDB {
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(96, 67);
+            this.label3.Location = new System.Drawing.Point(17, 331);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.Size = new System.Drawing.Size(93, 13);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Адрес";
+            this.label3.Text = "Номер телефона";
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.Window;
-            this.button1.Location = new System.Drawing.Point(202, 90);
+            this.button1.Location = new System.Drawing.Point(269, 415);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
@@ -137,7 +139,7 @@ namespace LabyDB {
             // button2
             // 
             this.button2.BackColor = System.Drawing.SystemColors.Window;
-            this.button2.Location = new System.Drawing.Point(121, 90);
+            this.button2.Location = new System.Drawing.Point(350, 415);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -148,7 +150,7 @@ namespace LabyDB {
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.Window;
-            this.button3.Location = new System.Drawing.Point(40, 90);
+            this.button3.Location = new System.Drawing.Point(431, 415);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -159,7 +161,7 @@ namespace LabyDB {
             // button6
             // 
             this.button6.BackColor = System.Drawing.SystemColors.Window;
-            this.button6.Location = new System.Drawing.Point(713, 415);
+            this.button6.Location = new System.Drawing.Point(767, 415);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 7;
@@ -170,7 +172,7 @@ namespace LabyDB {
             // button5
             // 
             this.button5.BackColor = System.Drawing.SystemColors.Window;
-            this.button5.Location = new System.Drawing.Point(632, 415);
+            this.button5.Location = new System.Drawing.Point(686, 415);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 8;
@@ -181,7 +183,7 @@ namespace LabyDB {
             // button7
             // 
             this.button7.BackColor = System.Drawing.SystemColors.Window;
-            this.button7.Location = new System.Drawing.Point(551, 415);
+            this.button7.Location = new System.Drawing.Point(605, 415);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 9;
@@ -192,7 +194,7 @@ namespace LabyDB {
             // button8
             // 
             this.button8.BackColor = System.Drawing.SystemColors.Window;
-            this.button8.Location = new System.Drawing.Point(283, 90);
+            this.button8.Location = new System.Drawing.Point(767, 276);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(75, 23);
             this.button8.TabIndex = 22;
@@ -215,12 +217,31 @@ namespace LabyDB {
             this.sampleDatabaseDataSet1BindingSource.DataSource = this.sampleDatabaseDataSet1;
             this.sampleDatabaseDataSet1BindingSource.Position = 0;
             // 
+            // textBox4
+            // 
+            this.textBox4.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.textBox4.Location = new System.Drawing.Point(116, 354);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(309, 20);
+            this.textBox4.TabIndex = 23;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 357);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 13);
+            this.label4.TabIndex = 24;
+            this.label4.Text = "Номер вод. удост.";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button5);
@@ -239,7 +260,7 @@ namespace LabyDB {
             this.MinimizeBox = false;
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "2 лаба";
+            this.Text = "Владелец";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet)).EndInit();
@@ -273,6 +294,8 @@ namespace LabyDB {
         private System.Windows.Forms.BindingSource sampleDatabaseDataSetBindingSource1;
         private SampleDatabaseDataSet1 sampleDatabaseDataSet1;
         private System.Windows.Forms.BindingSource sampleDatabaseDataSet1BindingSource;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label4;
     }
 }
 
