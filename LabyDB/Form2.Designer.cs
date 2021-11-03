@@ -39,7 +39,6 @@ namespace LabyDB {
             this.button3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.sampleDatabaseDataSetBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
@@ -180,17 +179,6 @@ namespace LabyDB {
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.SystemColors.Window;
-            this.button7.Location = new System.Drawing.Point(605, 415);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 9;
-            this.button7.Text = "Назад";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // button8
             // 
             this.button8.BackColor = System.Drawing.SystemColors.Window;
@@ -243,7 +231,6 @@ namespace LabyDB {
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button3);
@@ -289,7 +276,6 @@ namespace LabyDB {
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.BindingSource sampleDatabaseDataSetBindingSource1;
         private SampleDatabaseDataSet1 sampleDatabaseDataSet1;

@@ -20,13 +20,25 @@ namespace LabyDB {
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Program.form4.Show();
+            Program.form6.Show();
             this.Hide();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Program.form5.Show();
+            this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Program.form4.Show();
+            this.Hide();
         }
     }
 }

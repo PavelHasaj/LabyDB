@@ -6,11 +6,6 @@ namespace LabyDB
 {
     public partial class Form4 : Form
     {
-        public Form4()
-        {
-            InitializeComponent();
-        }
-
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
@@ -20,8 +15,8 @@ namespace LabyDB
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-            SqlCommand command_select = new SqlCommand("Select * From Services", connection);
-            dataAdapter.SelectCommand = command_select;
+            SqlCommand comand = new SqlCommand("Select * From Services ORDER BY Id_services ASC", connection);
+            dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
@@ -37,7 +32,7 @@ namespace LabyDB
             SqlCommand comand = new SqlCommand("Insert Into Services Values (@Id_services, @Name, @Cost)", connection);
             comand.Parameters.AddWithValue("@Id_services", Convert.ToInt64(textBox1.Text));
             comand.Parameters.AddWithValue("@Name", textBox2.Text);
-            comand.Parameters.AddWithValue("@Cost", textBox3.Text);
+            comand.Parameters.AddWithValue("@Cost", Convert.ToInt64(textBox3.Text));
 
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
@@ -89,23 +84,44 @@ namespace LabyDB
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Program.form3.Show();
+            Program.form5.Show();
             this.Hide();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            Program.form6.Show();
+            this.Hide();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            DataDelete();
         }
 
         private void Form4_Load(object sender, EventArgs e)
         {
             DatabaseUpdate();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataAdd();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataChange();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+        }
+
+        public Form4()
+        {
+            InitializeComponent();
         }
     }
 }

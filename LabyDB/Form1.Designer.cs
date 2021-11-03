@@ -56,7 +56,7 @@ namespace LabyDB {
             // button3
             // 
             this.button3.BackColor = System.Drawing.SystemColors.Window;
-            this.button3.Location = new System.Drawing.Point(12, 159);
+            this.button3.Location = new System.Drawing.Point(12, 215);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(99, 22);
             this.button3.TabIndex = 2;
@@ -73,16 +73,18 @@ namespace LabyDB {
             this.button4.TabIndex = 3;
             this.button4.Text = "Услуги";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
             this.button5.BackColor = System.Drawing.SystemColors.Window;
-            this.button5.Location = new System.Drawing.Point(12, 215);
+            this.button5.Location = new System.Drawing.Point(12, 159);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(99, 22);
             this.button5.TabIndex = 4;
             this.button5.Text = "Запчасти";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 

@@ -126,7 +126,7 @@ namespace LabyDB
         //Переход вперед
         private void button6_Click(object sender, EventArgs e)
         {
-            Program.form4.Show();
+            Program.form5.Show();
             this.Hide();
         }
     }
