@@ -35,7 +35,7 @@ namespace LabyDB
             connection.Open();
 
             SqlCommand comand = new SqlCommand("Insert Into Services Values (@Id_services, @Name, @Cost)", connection);
-            comand.Parameters.AddWithValue("@NId_services", textBox1.Text);
+            comand.Parameters.AddWithValue("@Id_services", Convert.ToInt64(textBox1.Text));
             comand.Parameters.AddWithValue("@Name", textBox2.Text);
             comand.Parameters.AddWithValue("@Cost", textBox3.Text);
 
