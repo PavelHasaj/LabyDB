@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LabyDB {
@@ -15,12 +12,13 @@ namespace LabyDB {
         public static Form4 form4 = new Form4();
         public static Form5 form5 = new Form5();
         public static Form6 form6 = new Form6();
+        public static login form7 = new login();
 
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(form1);
+            Application.Run(new login());
         }
 
         public static string GetConnectionString() {

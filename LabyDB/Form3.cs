@@ -4,14 +4,13 @@ using System.Data.SqlClient;
 
 namespace LabyDB
 {
-    public partial class Form3 : Form
-    {
+    public partial class Form3 : Form{
+        //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
-
-        private void DatabaseUpdate()
-        {
+        //Обновление
+        private void DatabaseUpdate(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -21,10 +20,8 @@ namespace LabyDB
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
-
-        void DataAdd()
-        {
-            //добавление записи
+        //Добавление записи
+        void DataAdd(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -41,9 +38,8 @@ namespace LabyDB
 
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
-
-        void DataChange()
-        {
+        //Изменение записи
+        void DataChange(){
             SqlCommand command = new SqlCommand("Update Cars set Id_owner=@Id_owner, Car_brandr=@Car_brand Where State_number = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
@@ -59,9 +55,8 @@ namespace LabyDB
 
             DatabaseUpdate();
         }
-
-        void DataDelete()
-        {
+        //Удаление записи
+        void DataDelete(){
             SqlCommand command = new SqlCommand("Delete From Cars where State_number = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
 
             dataGridView1.DataSource = null;
@@ -76,14 +71,12 @@ namespace LabyDB
             DatabaseUpdate();
         }
 
-        // Добавление
-        private void button1_Click(object sender, EventArgs e)
-        {
+        //Кнопка добавить
+        private void button1_Click(object sender, EventArgs e){
             DataAdd();
         }
 
-        private void Form3_Load(object sender, EventArgs e)
-        {
+        private void Form3_Load(object sender, EventArgs e){
             DatabaseUpdate();
 
             //Марки машины
@@ -124,51 +117,43 @@ namespace LabyDB
             comboBox1.Items.Add("ТагАЗ");
         }
 
-        // Изменение
-        private void button3_Click(object sender, EventArgs e)
-        {
+        //Кнопка изменить
+        private void button3_Click(object sender, EventArgs e){
             DataChange();
         }
 
-        // Удаление
-        private void button7_Click(object sender, EventArgs e)
-        {
+        //Кнопка удалить
+        private void button7_Click(object sender, EventArgs e){
             DataDelete();
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
+        //Кнопка обновить
+        private void button8_Click(object sender, EventArgs e){
             DatabaseUpdate();
         }
 
-        public Form3()
-        {
+        public Form3(){
             InitializeComponent();
         }
 
-        //Переход назад
-        private void button4_Click(object sender, EventArgs e)
-        {
+        //Кнопка назад
+        private void button4_Click(object sender, EventArgs e){
             Program.form2.Show();
             this.Hide();
         }
 
-        //Переход на главную
-        private void button5_Click(object sender, EventArgs e)
-        {
+        //Кнопка выход на главную
+        private void button5_Click(object sender, EventArgs e){
             Program.form1.Show();
             this.Hide();
         }
 
-        //Переход вперед
-        private void button6_Click(object sender, EventArgs e)
-        {
+        //Кнопка вперед
+        private void button6_Click(object sender, EventArgs e){
             Program.form5.Show();
             this.Hide();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
             
         }
     }

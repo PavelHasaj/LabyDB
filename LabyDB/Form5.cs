@@ -5,12 +5,12 @@ using System.Data.SqlClient;
 namespace LabyDB
 {
     public partial class Form5 : Form{
+        //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
-
-        private void DatabaseUpdate()
-        {
+        //Обновление
+        private void DatabaseUpdate(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -20,10 +20,8 @@ namespace LabyDB
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
-
-        void DataAdd()
-        {
-            //добавление записи
+        //Добавление записи
+        void DataAdd(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -40,9 +38,8 @@ namespace LabyDB
 
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
-
-        void DataChange()
-        {
+        //Изменение записи
+        void DataChange(){
             SqlCommand command = new SqlCommand("Update Spare_parts set Name=@Name, Cost=@Cost Where Id_spare_parts = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
@@ -58,9 +55,8 @@ namespace LabyDB
 
             DatabaseUpdate();
         }
-
-        void DataDelete()
-        {
+        //Удаление записи
+        void DataDelete(){
             SqlCommand command = new SqlCommand("Delete From Spare_parts where Id_spare_parts = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
 
             dataGridView1.DataSource = null;
@@ -79,13 +75,11 @@ namespace LabyDB
         int name;
         int cost;
 
-        public Form5()
-        {
+        public Form5(){
             InitializeComponent();
         }
 
-        private void Form5_Load(object sender, EventArgs e)
-        {
+        private void Form5_Load(object sender, EventArgs e){
             DatabaseUpdate();
 
             //Запчасти
@@ -97,42 +91,36 @@ namespace LabyDB
             comboBox1.Items.Add("Фильтр топливный");
             comboBox1.Items.Add("Щётка стеклоочистителя, задняя");
             comboBox1.Items.Add("Щётки стеклоочистителя, комплект");
+            comboBox1.Items.Add("Другое");
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+        //Кнопка добавить
+        private void button1_Click(object sender, EventArgs e){
             DataAdd();
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
+        //Кнопка изменить
+        private void button3_Click(object sender, EventArgs e){
            DataChange();
         }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
+        //Кнопка удалить
+        private void button7_Click(object sender, EventArgs e){
             DataDelete();
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
+        //Кнопка обновить
+        private void button8_Click(object sender, EventArgs e){
             DatabaseUpdate();
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
+        //Кнопка выход на главную
+        private void button5_Click(object sender, EventArgs e){
             Program.form1.Show();
             this.Hide();
         }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
+        //Кнопка назад
+        private void button4_Click(object sender, EventArgs e){
             Program.form3.Show();
             this.Hide();
         }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
+        //Кнопка вперед
+        private void button6_Click(object sender, EventArgs e){
             Program.form4.Show();
             this.Hide();
         }
@@ -140,45 +128,41 @@ namespace LabyDB
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //Вывод номера и цены запчасти
-            if (comboBox1.SelectedIndex == 0)
-            {
+            if (comboBox1.SelectedIndex == 0){
                 name = 1;
                 cost = 1971;
             }
-            else if (comboBox1.SelectedIndex == 1)
-            {
+            else if (comboBox1.SelectedIndex == 1){
                 name = 2;
                 cost = 1294;
             }
-            else if (comboBox1.SelectedIndex == 2)
-            {
+            else if (comboBox1.SelectedIndex == 2){
                 name = 3;
                 cost = 711;
             }
-            else if (comboBox1.SelectedIndex == 1)
-            {
+            else if (comboBox1.SelectedIndex == 3){
                 name = 4;
                 cost = 1614;
             }
-            else if (comboBox1.SelectedIndex == 2)
-            {
+            else if (comboBox1.SelectedIndex == 4){
                 name = 5;
                 cost = 3873;
             }
-            else if (comboBox1.SelectedIndex == 1)
-            {
+            else if (comboBox1.SelectedIndex == 5){
                 name = 6;
                 cost = 1824;
             }
-            else if (comboBox1.SelectedIndex == 2)
-            {
+            else if (comboBox1.SelectedIndex == 6){
                 name = 7;
                 cost = 709;
             }
-            else if (comboBox1.SelectedIndex == 1)
-            {
+            else if (comboBox1.SelectedIndex == 7){
                 name = 8;
                 cost = 2832;
+            }
+            else if (comboBox1.SelectedIndex == 8){
+                name = 0;
+                cost = 0;
             }
 
             textBox1.Text = name.ToString();

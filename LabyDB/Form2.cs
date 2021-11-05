@@ -7,13 +7,11 @@ namespace LabyDB {
         public Form2() {
             InitializeComponent();
         }
-
-        //Подключение
+        //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
-
-        //Обнавление
+        //Обновление
         private void DatabaseUpdate(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
@@ -24,8 +22,7 @@ namespace LabyDB {
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
-
-        //добавление записи
+        //Добавление записи
         void DataAdd(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
@@ -41,7 +38,6 @@ namespace LabyDB {
             connection.Close();
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
-
         //Изменение записи
         void DataChange(){
             SqlCommand command = new SqlCommand("Update Owner set FIO=@FIO, Phone_number=@Phone_number, Driver_license_number=@Driver_license_number Where Id_owner = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
@@ -57,7 +53,6 @@ namespace LabyDB {
             connection.Close();
             DatabaseUpdate();
         }
-
         //Удаление записи
         void DataDelete(){
             SqlCommand command = new SqlCommand("Delete From Owner where Id_owner = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
@@ -74,30 +69,30 @@ namespace LabyDB {
         private void Form1_Load(object sender, EventArgs e) {
             DatabaseUpdate();
         }
-
+        //Кнопка добавить
         private void add_button(object sender, EventArgs e) {
             DataAdd();
         }
-
+        //Кнопка изменить
         private void data_change_button(object sender, EventArgs e) {
             DataChange();
         }
-
+        //Кнопка удалить
         private void data_delete_button(object sender, EventArgs e) {
             DataDelete();
         }
-
+        //Кнопка вперед
         private void button6_Click(object sender, EventArgs e)
         {
             Program.form3.Show();
             this.Hide();
         }
-
+        //Кнопка обновить
         private void button8_Click(object sender, EventArgs e)
         {
             DatabaseUpdate();
         }
-
+        //Кнопка выход на главную
         private void button5_Click(object sender, EventArgs e)
         {
             Program.form1.Show();
