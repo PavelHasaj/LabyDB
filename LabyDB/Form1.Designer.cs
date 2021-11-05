@@ -34,7 +34,7 @@ namespace LabyDB {
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button1.BackColor = System.Drawing.SystemColors.Menu;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.Location = new System.Drawing.Point(12, 103);
             this.button1.Name = "button1";
@@ -46,7 +46,7 @@ namespace LabyDB {
             // 
             // button2
             // 
-            this.button2.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button2.BackColor = System.Drawing.SystemColors.Menu;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.Location = new System.Drawing.Point(12, 131);
             this.button2.Name = "button2";
@@ -58,7 +58,7 @@ namespace LabyDB {
             // 
             // button3
             // 
-            this.button3.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button3.BackColor = System.Drawing.SystemColors.Menu;
             this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button3.Location = new System.Drawing.Point(12, 215);
             this.button3.Name = "button3";
@@ -70,7 +70,7 @@ namespace LabyDB {
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button4.BackColor = System.Drawing.SystemColors.Menu;
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button4.Location = new System.Drawing.Point(12, 187);
             this.button4.Name = "button4";
@@ -82,7 +82,7 @@ namespace LabyDB {
             // 
             // button5
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.button5.BackColor = System.Drawing.SystemColors.Menu;
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button5.Location = new System.Drawing.Point(12, 159);
             this.button5.Name = "button5";
@@ -96,7 +96,7 @@ namespace LabyDB {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightCyan;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(854, 450);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);

@@ -24,7 +24,7 @@ namespace LabyDB {
         }
 
         public static string GetConnectionString() {
-            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\" + Environment.UserName + @"\source\repos\123\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True";
+            return @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\" + Environment.UserName + @"\source\repos\Auto_repair_shop\LabyDB\LabyDB\SampleDatabase.mdf;Integrated Security=True";
         }
     }
 }

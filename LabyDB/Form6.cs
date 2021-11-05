@@ -5,13 +5,12 @@ using System.Data.SqlClient;
 namespace LabyDB
 {
     public partial class Form6 : Form{
-
+        //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
-
-        private void DatabaseUpdate()
-        {
+        //Обновление
+        private void DatabaseUpdate(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -21,17 +20,15 @@ namespace LabyDB
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
-
-        void DataAdd()
-        {
-            //добавление записи
+        //Добавление записи
+        void DataAdd(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
 
             SqlCommand comand = new SqlCommand("Insert Into Service Values (@Id, @State_number, @Id_services, @Id_spare_parts, @Ready_date, @Total_cost)", connection);
             comand.Parameters.AddWithValue("@Id", Convert.ToInt64(textBox1.Text));
-            comand.Parameters.AddWithValue("@State_number", textBox2.Text);
+            comand.Parameters.AddWithValue("@State_number", comboBox1.Text);
             comand.Parameters.AddWithValue("@Id_services", Convert.ToInt64(textBox3.Text));
             comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt64(textBox4.Text));
             comand.Parameters.AddWithValue("@Ready_date", textBox5.Text);
@@ -44,15 +41,14 @@ namespace LabyDB
 
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
-
-        void DataChange()
-        {
+        //Изменение записи
+        void DataChange(){
             SqlCommand command = new SqlCommand("Update Service set State_number=@State_number, Id_services=@Id_services, Id_spare_parts=@Id_spare_parts, Ready_date=@Ready_date, Total_cost=@Total_cost Where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
 
-            command.Parameters.AddWithValue("@Id_services", textBox2.Text);
+            command.Parameters.AddWithValue("@Id_services", comboBox1.Text);
             command.Parameters.AddWithValue("@Id_services", Convert.ToInt64(textBox3.Text));
             command.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt64(textBox4.Text));
             command.Parameters.AddWithValue("@Ready_date", textBox5.Text);
@@ -65,9 +61,8 @@ namespace LabyDB
 
             DatabaseUpdate();
         }
-
-        void DataDelete()
-        {
+        //Удаление записи
+        void DataDelete(){
             SqlCommand command = new SqlCommand("Delete From Service where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
 
             dataGridView1.DataSource = null;
@@ -89,37 +84,46 @@ namespace LabyDB
         private void Form6_Load(object sender, EventArgs e){
             DatabaseUpdate();
         }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
+        //Кнопка обновить
+        private void button8_Click(object sender, EventArgs e){
             DatabaseUpdate();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+        //Кнопка добавить
+        private void button1_Click(object sender, EventArgs e){
             DataAdd();
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
+        //Кнопка изменить
+        private void button3_Click(object sender, EventArgs e){
             DataChange();
         }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
+        //Кнопка удалить
+        private void button7_Click(object sender, EventArgs e){
             DataDelete();
         }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
+        //Кнопка назад
+        private void button4_Click(object sender, EventArgs e){
             Program.form4.Show();
             this.Hide();
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
+        //Кнопка выход на главную
+        private void button5_Click(object sender, EventArgs e){
             Program.form1.Show();
             this.Hide();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        //Тут должна быть функция подсчета итоговой цены.
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

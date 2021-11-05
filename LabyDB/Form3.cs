@@ -32,7 +32,7 @@ namespace LabyDB
             SqlCommand comand = new SqlCommand("Insert Into Cars Values (@Id_owner, @State_number, @Car_brand)", connection);
             comand.Parameters.AddWithValue("@Id_owner", Convert.ToInt64(textBox1.Text));
             comand.Parameters.AddWithValue("@State_number", textBox2.Text);
-            comand.Parameters.AddWithValue("@Car_brand", textBox3.Text);
+            comand.Parameters.AddWithValue("@Car_brand", comboBox1.Text);
 
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
@@ -50,7 +50,7 @@ namespace LabyDB
             connection.Open();
 
             command.Parameters.AddWithValue("@Id_owner", textBox2.Text);
-            command.Parameters.AddWithValue("@Car_brand", textBox3.Text);
+            command.Parameters.AddWithValue("@Car_brand", comboBox1.Text);
 
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(dataSet);
@@ -85,6 +85,43 @@ namespace LabyDB
         private void Form3_Load(object sender, EventArgs e)
         {
             DatabaseUpdate();
+
+            //Марки машины
+            comboBox1.Items.Add("Audi");
+            comboBox1.Items.Add("BMW");
+            comboBox1.Items.Add("Cadillac");
+            comboBox1.Items.Add("Chevrolet");
+            comboBox1.Items.Add("Citroen");
+            comboBox1.Items.Add("Daewoo");
+            comboBox1.Items.Add("Fiat");
+            comboBox1.Items.Add("Ford");
+            comboBox1.Items.Add("Ford usa");
+            comboBox1.Items.Add("Honda");
+            comboBox1.Items.Add("Hummer");
+            comboBox1.Items.Add("Hyundai");
+            comboBox1.Items.Add("Infiniti");
+            comboBox1.Items.Add("Jaguar");
+            comboBox1.Items.Add("Jeep");
+            comboBox1.Items.Add("Kia");
+            comboBox1.Items.Add("Land rover");
+            comboBox1.Items.Add("Lexus");
+            comboBox1.Items.Add("Mazda");
+            comboBox1.Items.Add("Mercedes");
+            comboBox1.Items.Add("Mitsubishi");
+            comboBox1.Items.Add("Nissan");
+            comboBox1.Items.Add("Opel");
+            comboBox1.Items.Add("Peugeot");
+            comboBox1.Items.Add("Renault");
+            comboBox1.Items.Add("Seat");
+            comboBox1.Items.Add("Skoda");
+            comboBox1.Items.Add("SsangYong");
+            comboBox1.Items.Add("Subaru");
+            comboBox1.Items.Add("Suzuki");
+            comboBox1.Items.Add("Toyota");
+            comboBox1.Items.Add("Volkswagen");
+            comboBox1.Items.Add("Volvo");
+            comboBox1.Items.Add("ЗАЗ");
+            comboBox1.Items.Add("ТагАЗ");
         }
 
         // Изменение
@@ -128,6 +165,11 @@ namespace LabyDB
         {
             Program.form5.Show();
             this.Hide();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

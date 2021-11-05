@@ -30,7 +30,7 @@ namespace LabyDB
 
             SqlCommand comand = new SqlCommand("Insert Into Spare_parts Values (@Id_spare_parts, @Name, @Cost)", connection);
             comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt64(textBox1.Text));
-            comand.Parameters.AddWithValue("@Name", textBox2.Text);
+            comand.Parameters.AddWithValue("@Name", comboBox1.Text);
             comand.Parameters.AddWithValue("@Cost", Convert.ToInt64(textBox3.Text));
 
             dataAdapter.SelectCommand = comand;
@@ -48,7 +48,7 @@ namespace LabyDB
             dataSet.Clear();
             connection.Open();
 
-            command.Parameters.AddWithValue("@Name", textBox2.Text);
+            command.Parameters.AddWithValue("@Name", comboBox1.Text);
             command.Parameters.AddWithValue("@Cost", textBox3.Text);
 
             dataAdapter.SelectCommand = command;
@@ -75,6 +75,10 @@ namespace LabyDB
             DatabaseUpdate();
         }
 
+        //Объявление переменной
+        int name;
+        int cost;
+
         public Form5()
         {
             InitializeComponent();
@@ -83,6 +87,16 @@ namespace LabyDB
         private void Form5_Load(object sender, EventArgs e)
         {
             DatabaseUpdate();
+
+            //Запчасти
+            comboBox1.Items.Add("Свеча накаливания");
+            comboBox1.Items.Add("Фильтр воздушный");
+            comboBox1.Items.Add("Фильтр масляный");
+            comboBox1.Items.Add("Фильтр салона, пылевой");
+            comboBox1.Items.Add("Фильтр салона, угольный");
+            comboBox1.Items.Add("Фильтр топливный");
+            comboBox1.Items.Add("Щётка стеклоочистителя, задняя");
+            comboBox1.Items.Add("Щётки стеклоочистителя, комплект");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -121,6 +135,54 @@ namespace LabyDB
         {
             Program.form4.Show();
             this.Hide();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Вывод номера и цены запчасти
+            if (comboBox1.SelectedIndex == 0)
+            {
+                name = 1;
+                cost = 1971;
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+                name = 2;
+                cost = 1294;
+            }
+            else if (comboBox1.SelectedIndex == 2)
+            {
+                name = 3;
+                cost = 711;
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+                name = 4;
+                cost = 1614;
+            }
+            else if (comboBox1.SelectedIndex == 2)
+            {
+                name = 5;
+                cost = 3873;
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+                name = 6;
+                cost = 1824;
+            }
+            else if (comboBox1.SelectedIndex == 2)
+            {
+                name = 7;
+                cost = 709;
+            }
+            else if (comboBox1.SelectedIndex == 1)
+            {
+                name = 8;
+                cost = 2832;
+            }
+
+            textBox1.Text = name.ToString();
+            textBox3.Text = cost.ToString();
         }
     }
 }
