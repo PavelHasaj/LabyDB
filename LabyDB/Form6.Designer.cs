@@ -51,6 +51,7 @@ namespace LabyDB
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button6 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -258,7 +259,7 @@ namespace LabyDB
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(854, 20);
             this.textBox2.TabIndex = 63;
-            this.textBox2.Text = "Поиск:";
+            this.textBox2.Text = "Поиск и фильтрация:";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.Click += new System.EventHandler(this.textBox2_Clear);
             // 
@@ -274,12 +275,25 @@ namespace LabyDB
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.SystemColors.Menu;
+            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button9.Location = new System.Drawing.Point(579, 284);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(101, 23);
+            this.button9.TabIndex = 65;
+            this.button9.Text = "фильтрация И.ц.";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form6
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.comboBox1);
@@ -338,5 +352,6 @@ namespace LabyDB
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button9;
     }
 }

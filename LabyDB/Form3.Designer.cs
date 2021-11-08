@@ -50,6 +50,7 @@ namespace LabyDB
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource1)).BeginInit();
@@ -232,7 +233,7 @@ namespace LabyDB
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(854, 20);
             this.textBox5.TabIndex = 51;
-            this.textBox5.Text = "Поиск:";
+            this.textBox5.Text = "Поиск и фильтрация:";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox5.Click += new System.EventHandler(this.textBox5_Clear);
             // 
@@ -248,12 +249,25 @@ namespace LabyDB
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.SystemColors.Menu;
+            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button9.Location = new System.Drawing.Point(579, 284);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(101, 23);
+            this.button9.TabIndex = 53;
+            this.button9.Text = "фильтрация ID";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.comboBox1);
@@ -307,5 +321,6 @@ namespace LabyDB
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button9;
     }
 }

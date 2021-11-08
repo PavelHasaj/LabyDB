@@ -123,5 +123,19 @@ namespace LabyDB {
         {
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("Select * From Owner where Id_owner>@Id_owner", connection);
+            command_select.Parameters.AddWithValue("@Id_owner", Convert.ToInt32(textBox5.Text));
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
     }
 }

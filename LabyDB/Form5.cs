@@ -188,5 +188,19 @@ namespace LabyDB
         {
             textBox5.Clear();
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("Select * From Spare_parts where Id_spare_parts>@Id_spare_parts", connection);
+            command_select.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt32(textBox5.Text));
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
     }
 }

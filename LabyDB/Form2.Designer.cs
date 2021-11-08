@@ -48,6 +48,7 @@ namespace LabyDB {
             this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSetBindingSource)).BeginInit();
@@ -258,10 +259,22 @@ namespace LabyDB {
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(854, 20);
             this.textBox5.TabIndex = 26;
-            this.textBox5.Text = "Поиск:";
+            this.textBox5.Text = "Поиск и фильтрация:";
             this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox5.Click += new System.EventHandler(this.textBox5_Clear);
             this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.Menu;
+            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button7.Location = new System.Drawing.Point(579, 284);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(101, 23);
+            this.button7.TabIndex = 27;
+            this.button7.Text = "фильтрация ID";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form2
             // 
@@ -269,6 +282,7 @@ namespace LabyDB {
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label4);
@@ -329,6 +343,7 @@ namespace LabyDB {
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button button7;
     }
 }
 
