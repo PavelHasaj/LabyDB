@@ -156,5 +156,25 @@ namespace LabyDB
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
             
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Selected = false;
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    if (dataGridView1.Rows[i].Cells[j].Value != null)
+                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox5.Text))
+                        {
+                            dataGridView1.Rows[i].Selected = true;
+                            break;
+                        }
+            }
+        }
+
+        private void textBox5_Clear(object sender, EventArgs e)
+        {
+            textBox5.Clear();
+        }
     }
 }
