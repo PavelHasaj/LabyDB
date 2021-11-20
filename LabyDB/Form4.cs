@@ -95,6 +95,8 @@ namespace LabyDB
         int cost;
 
         private void Form4_Load(object sender, EventArgs e){
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Services". При необходимости она может быть перемещена или удалена.
+            this.servicesTableAdapter.Fill(this.sampleDatabaseDataSet1.Services);
             DatabaseUpdate();
 
             //Услуги
@@ -105,12 +107,25 @@ namespace LabyDB
             comboBox1.Items.Add("Замена технических жидкостей");
             comboBox1.Items.Add("Заправка и ремонт кондиционеров");
             comboBox1.Items.Add("Компьютерная диагностика");
+            comboBox1.Items.Add("Кузовной ремон");
+            comboBox1.Items.Add("Подготовка и продажа новых и б/у автомобилей");
             comboBox1.Items.Add("Развал схождения 3D");
+            comboBox1.Items.Add("Регламентное ТО");
+            comboBox1.Items.Add("Ремонт автоматических и механических коробок передач");
             comboBox1.Items.Add("Ремонт выхлопной системы");
             comboBox1.Items.Add("Ремонт двигателя");
             comboBox1.Items.Add("Ремонт подвески");
+            comboBox1.Items.Add("Ремонт ходовой части, балансировка, развал-схождения");
+            comboBox1.Items.Add("Ремонт электрики в машинах");
+            comboBox1.Items.Add("Реставрация авто и запчастей");
             comboBox1.Items.Add("Тонировка");
+            comboBox1.Items.Add("Установка и обслуживание газового оборудования в автомобилях");
             comboBox1.Items.Add("Другое");
+
+            ToolTip t = new ToolTip();
+            t.SetToolTip(button1, "Нажмите чтобы добавить новую запись.");
+            t.SetToolTip(button3, "Нажмите чтобы изменить существующую запись.");
+            t.SetToolTip(button7, "Нажмите чтобы удалить существующую запись.");
         }
         //Кнопка добавить
         private void button1_Click(object sender, EventArgs e){
@@ -130,6 +145,12 @@ namespace LabyDB
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
+            //Вывод подсказки
+            object _dt = null;
+            comboBox1.DataSource = _dt;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             //Вывод номера и цены услуги
             if (comboBox1.SelectedIndex == 0){
                 name = 1;
@@ -179,6 +200,51 @@ namespace LabyDB
                 name = 12;
                 cost = 1000;
             }
+            else if (comboBox1.SelectedIndex == 12)
+            {
+                name = 13;
+                cost = 1500;
+            }
+            else if (comboBox1.SelectedIndex == 13)
+            {
+                name = 14;
+                cost = 1600;
+            }
+            else if (comboBox1.SelectedIndex == 14)
+            {
+                name = 15;
+                cost = 1300;
+            }
+            else if (comboBox1.SelectedIndex == 15)
+            {
+                name = 16;
+                cost = 2000;
+            }
+            else if (comboBox1.SelectedIndex == 16)
+            {
+                name = 17;
+                cost = 3000;
+            }
+            else if (comboBox1.SelectedIndex == 17)
+            {
+                name = 18;
+                cost = 2500;
+            }
+            else if (comboBox1.SelectedIndex == 18)
+            {
+                name = 19;
+                cost = 1900;
+            }
+            else if (comboBox1.SelectedIndex == 19)
+            {
+                name = 20;
+                cost = 2100;
+            }
+            else if (comboBox1.SelectedIndex == 20)
+            {
+                name = 21;
+                cost = 0;
+            }
 
             textBox1.Text = name.ToString();
             textBox3.Text = cost.ToString();
@@ -216,6 +282,79 @@ namespace LabyDB
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("Select * From Services where Cost>@Cost", connection);
+            command_select.Parameters.AddWithValue("@Cost", Convert.ToInt32(textBox5.Text));
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            //Вывод подсказки
+            object _dt = null;
+            comboBox1.DataSource = _dt;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Open(@"Q:\\otchet", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    xlApp.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+                    (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+                }
+            }
+            xlApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Скопинцев Олег Данилович ";
+
+
+            xlApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Size = 14;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+
+            xlApp.Visible = true;
+            xlApp.UserControl = true;
         }
     }
 }

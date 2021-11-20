@@ -4,13 +4,14 @@ using System.Data.SqlClient;
 
 namespace LabyDB
 {
-    public partial class Form6 : Form{
+    public partial class Form6 : Form {
         //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
+
         //Обновление
-        private void DatabaseUpdate(){
+        private void DatabaseUpdate() {
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -26,13 +27,14 @@ namespace LabyDB
             dataSet.Clear();
             connection.Open();
 
-            SqlCommand comand = new SqlCommand("Insert Into Service Values (@Id, @State_number, @Id_services, @Id_spare_parts, @Ready_date, @Total_cost)", connection);
-            comand.Parameters.AddWithValue("@Id", Convert.ToInt64(textBox1.Text));
+            SqlCommand comand = new SqlCommand("Insert Into Service Values (@Id, @State_number, @Id_services, @Id_spare_parts, @Ready_date, @Nacenka, @Total_cost)", connection);
+            comand.Parameters.AddWithValue("@Id", Convert.ToInt32(textBox1.Text));
             comand.Parameters.AddWithValue("@State_number", comboBox1.Text);
-            comand.Parameters.AddWithValue("@Id_services", Convert.ToInt64(textBox3.Text));
-            comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt64(textBox4.Text));
-            comand.Parameters.AddWithValue("@Ready_date", textBox5.Text);
-            comand.Parameters.AddWithValue("@Total_cost", Convert.ToInt64(textBox6.Text));
+            comand.Parameters.AddWithValue("@Id_services", Convert.ToInt32(comboBox2.Text));
+            comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt32(comboBox3.Text));
+            comand.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(textBox5.Text));
+            comand.Parameters.AddWithValue("@Nacenka", Convert.ToInt32(textBox6.Text));
+            comand.Parameters.AddWithValue("@Total_cost", Convert.ToInt32(textBox3.Text));
 
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
@@ -41,18 +43,42 @@ namespace LabyDB
 
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
-        //Изменение записи
-        void DataChange(){
-            SqlCommand command = new SqlCommand("Update Service set State_number=@State_number, Id_services=@Id_services, Id_spare_parts=@Id_spare_parts, Ready_date=@Ready_date, Total_cost=@Total_cost Where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
+        //складывает наценку + сумма(услуг + цены товара)
+        void DataDB()
+        {
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
 
-            command.Parameters.AddWithValue("@Id_services", comboBox1.Text);
-            command.Parameters.AddWithValue("@Id_services", Convert.ToInt64(textBox3.Text));
-            command.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt64(textBox4.Text));
-            command.Parameters.AddWithValue("@Ready_date", textBox5.Text);
-            command.Parameters.AddWithValue("@Total_cost", Convert.ToInt64(textBox6.Text));
+            SqlCommand comand = new SqlCommand("UPDATE Service SET Total_cost=Total_cost+Nacenka", connection);
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
+        private void DataDB2()
+        {
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand comand = new SqlCommand("SELECT Service.Id, Service.State_number, Service.Id_services, Service.Id_spare_parts, Service.Ready_date, Service.Nacenka, Services.Cost + Spare_parts.Cost AS Total_cost FROM (Service INNER JOIN Services ON Service.Id_services = Services.Id_services) LEFT JOIN Spare_parts ON Service.Id_spare_parts = Spare_parts.Id_spare_parts WHERE Service.State_number = Service.State_number", connection);
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
+        //Изменение записи
+        void DataChange(){
+            SqlCommand command = new SqlCommand("Update Service set State_number=@State_number, Id_services=@Id_services, Id_spare_parts=@Id_spare_parts, Ready_date=@Ready_date, Nacenka=@Nacenka Where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+
+            command.Parameters.AddWithValue("@State_number", comboBox1.Text);
+            command.Parameters.AddWithValue("@Id_services", Convert.ToInt32(comboBox2.Text));
+            command.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt32(comboBox3.Text));
+            command.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(textBox5.Text));
+            command.Parameters.AddWithValue("@Nacenka", Convert.ToInt32(textBox6.Text));
 
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(dataSet);
@@ -82,7 +108,22 @@ namespace LabyDB
         }
 
         private void Form6_Load(object sender, EventArgs e){
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Service". При необходимости она может быть перемещена или удалена.
+            this.serviceTableAdapter.Fill(this.sampleDatabaseDataSet1.Service);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Spare_parts". При необходимости она может быть перемещена или удалена.
+            this.spare_partsTableAdapter.Fill(this.sampleDatabaseDataSet1.Spare_parts);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Services". При необходимости она может быть перемещена или удалена.
+            this.servicesTableAdapter.Fill(this.sampleDatabaseDataSet1.Services);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Cars". При необходимости она может быть перемещена или удалена.
+            this.carsTableAdapter.Fill(this.sampleDatabaseDataSet1.Cars);
             DatabaseUpdate();
+            textBox3.Enabled = false;//недоступность
+            textBox3.Visible = false;//скрытие поля ввода
+
+            ToolTip t = new ToolTip();
+            t.SetToolTip(button1, "Нажмите чтобы добавить новую запись.");
+            t.SetToolTip(button3, "Нажмите чтобы изменить существующую запись.");
+            t.SetToolTip(button7, "Нажмите чтобы удалить существующую запись.");
         }
         //Кнопка обновить
         private void button8_Click(object sender, EventArgs e){
@@ -115,15 +156,9 @@ namespace LabyDB
         {
 
         }
-        //Тут должна быть функция подсчета итоговой цены.
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -147,6 +182,66 @@ namespace LabyDB
         }
 
         private void button9_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("Select * From Service where Ready_date>@Ready_date", connection);
+            command_select.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(textBox2.Text));
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Open(@"Q:\\otchet", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    xlApp.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+                    (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+                }
+            }
+            xlApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Скопинцев Олег Данилович ";
+
+
+            xlApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Size = 14;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+
+            xlApp.Visible = true;
+            xlApp.UserControl = true;
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
         {
             DatabaseUpdate();
             dataGridView1.DataSource = null;

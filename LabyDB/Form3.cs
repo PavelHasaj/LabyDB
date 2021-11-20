@@ -14,7 +14,7 @@ namespace LabyDB
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-            SqlCommand comand = new SqlCommand("Select * From Cars ORDER BY State_number ASC", connection);
+            SqlCommand comand = new SqlCommand("Select * From Cars ORDER BY Id_owner ASC", connection);
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
@@ -40,12 +40,12 @@ namespace LabyDB
         }
         //Изменение записи
         void DataChange(){
-            SqlCommand command = new SqlCommand("Update Cars set Id_owner=@Id_owner, Car_brandr=@Car_brand Where State_number = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
+            SqlCommand command = new SqlCommand("Update Cars set State_number=@State_number, Car_brand=@Car_brand Where Id_owner = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
 
-            command.Parameters.AddWithValue("@Id_owner", textBox2.Text);
+            command.Parameters.AddWithValue("@State_number", textBox2.Text);
             command.Parameters.AddWithValue("@Car_brand", comboBox1.Text);
 
             dataAdapter.SelectCommand = command;
@@ -57,7 +57,7 @@ namespace LabyDB
         }
         //Удаление записи
         void DataDelete(){
-            SqlCommand command = new SqlCommand("Delete From Cars where State_number = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
+            SqlCommand command = new SqlCommand("Delete From Cars where Id_owner = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
 
             dataGridView1.DataSource = null;
             dataSet.Clear();
@@ -74,9 +74,14 @@ namespace LabyDB
         //Кнопка добавить
         private void button1_Click(object sender, EventArgs e){
             DataAdd();
+
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = dataSet.Tables[0];
         }
 
         private void Form3_Load(object sender, EventArgs e){
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Cars". При необходимости она может быть перемещена или удалена.
+            this.carsTableAdapter.Fill(this.sampleDatabaseDataSet1.Cars);
             DatabaseUpdate();
 
             //Марки машины
@@ -115,6 +120,11 @@ namespace LabyDB
             comboBox1.Items.Add("Volvo");
             comboBox1.Items.Add("ЗАЗ");
             comboBox1.Items.Add("ТагАЗ");
+
+            ToolTip t = new ToolTip();
+            t.SetToolTip(button1, "Нажмите чтобы добавить новую запись.");
+            t.SetToolTip(button3, "Нажмите чтобы изменить существующую запись.");
+            t.SetToolTip(button7, "Нажмите чтобы удалить существующую запись.");
         }
 
         //Кнопка изменить
@@ -154,7 +164,6 @@ namespace LabyDB
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -189,6 +198,65 @@ namespace LabyDB
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+        }
+
+        private void Dobavit(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            //Вывод подсказки
+            object _dt = null;
+            comboBox1.DataSource = _dt;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Open(@"Q:\\otchet", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    xlApp.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+                    (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+                }
+            }
+            xlApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Скопинцев Олег Данилович ";
+
+
+            xlApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Size = 14;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+
+            xlApp.Visible = true;
+            xlApp.UserControl = true;
         }
     }
 }

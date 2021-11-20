@@ -29,8 +29,14 @@ namespace LabyDB
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form5));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idsparepartsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.costDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sparepartsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,24 +53,63 @@ namespace LabyDB
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.spare_partsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.Spare_partsTableAdapter();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sparepartsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idsparepartsDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.costDataGridViewTextBoxColumn});
             this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dataGridView1.DataSource = this.sparepartsBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(854, 258);
             this.dataGridView1.TabIndex = 31;
+            // 
+            // idsparepartsDataGridViewTextBoxColumn
+            // 
+            this.idsparepartsDataGridViewTextBoxColumn.DataPropertyName = "Id_spare_parts";
+            this.idsparepartsDataGridViewTextBoxColumn.HeaderText = "id запчасти";
+            this.idsparepartsDataGridViewTextBoxColumn.Name = "idsparepartsDataGridViewTextBoxColumn";
+            // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Наименование";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            // 
+            // costDataGridViewTextBoxColumn
+            // 
+            this.costDataGridViewTextBoxColumn.DataPropertyName = "Cost";
+            this.costDataGridViewTextBoxColumn.HeaderText = "Цена";
+            this.costDataGridViewTextBoxColumn.Name = "costDataGridViewTextBoxColumn";
+            // 
+            // sparepartsBindingSource
+            // 
+            this.sparepartsBindingSource.DataMember = "Spare_parts";
+            this.sparepartsBindingSource.DataSource = this.sampleDatabaseDataSet1;
+            // 
+            // sampleDatabaseDataSet1
+            // 
+            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
+            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // textBox1
             // 
@@ -87,27 +132,27 @@ namespace LabyDB
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(20, 287);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.Size = new System.Drawing.Size(93, 13);
             this.label1.TabIndex = 38;
-            this.label1.Text = "Номер запчасти";
+            this.label1.Text = "Номер запчасти:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(27, 313);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 13);
+            this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 39;
-            this.label3.Text = "Наименование";
+            this.label3.Text = "Наименование:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(77, 340);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.Size = new System.Drawing.Size(36, 13);
             this.label4.TabIndex = 40;
-            this.label4.Text = "Цена";
+            this.label4.Text = "Цена:";
             // 
             // button8
             // 
@@ -125,7 +170,7 @@ namespace LabyDB
             // 
             this.button5.BackColor = System.Drawing.SystemColors.Menu;
             this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Location = new System.Drawing.Point(687, 415);
+            this.button5.Location = new System.Drawing.Point(686, 415);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 43;
@@ -137,7 +182,7 @@ namespace LabyDB
             // 
             this.button4.BackColor = System.Drawing.SystemColors.Menu;
             this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Location = new System.Drawing.Point(606, 415);
+            this.button4.Location = new System.Drawing.Point(605, 415);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 44;
@@ -202,6 +247,7 @@ namespace LabyDB
             this.comboBox1.Size = new System.Drawing.Size(309, 21);
             this.comboBox1.TabIndex = 49;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.Click += new System.EventHandler(this.comboBox1_Click);
             // 
             // textBox5
             // 
@@ -219,7 +265,7 @@ namespace LabyDB
             // 
             this.button2.BackColor = System.Drawing.SystemColors.Menu;
             this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Location = new System.Drawing.Point(687, 284);
+            this.button2.Location = new System.Drawing.Point(686, 284);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 51;
@@ -231,13 +277,41 @@ namespace LabyDB
             // 
             this.button9.BackColor = System.Drawing.SystemColors.Menu;
             this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button9.Location = new System.Drawing.Point(580, 284);
+            this.button9.Location = new System.Drawing.Point(566, 284);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(101, 23);
+            this.button9.Size = new System.Drawing.Size(114, 23);
             this.button9.TabIndex = 52;
-            this.button9.Text = "фильтрация ID";
+            this.button9.Text = "Фильтрация ID";
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // spare_partsTableAdapter
+            // 
+            this.spare_partsTableAdapter.ClearBeforeFill = true;
+            // 
+            // button10
+            // 
+            this.button10.BackColor = System.Drawing.SystemColors.Menu;
+            this.button10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button10.Location = new System.Drawing.Point(566, 313);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(114, 23);
+            this.button10.TabIndex = 53;
+            this.button10.Text = "Фильтрация цены";
+            this.button10.UseVisualStyleBackColor = false;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.SystemColors.Menu;
+            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button11.Location = new System.Drawing.Point(453, 284);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(107, 23);
+            this.button11.TabIndex = 75;
+            this.button11.Text = "Экспорт отчета";
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // Form5
             // 
@@ -245,6 +319,8 @@ namespace LabyDB
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.button11);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox5);
@@ -262,6 +338,7 @@ namespace LabyDB
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -271,6 +348,8 @@ namespace LabyDB
             this.Text = "Запчасти";
             this.Load += new System.EventHandler(this.Form5_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sparepartsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,5 +374,13 @@ namespace LabyDB
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button9;
+        private SampleDatabaseDataSet1 sampleDatabaseDataSet1;
+        private System.Windows.Forms.BindingSource sparepartsBindingSource;
+        private SampleDatabaseDataSet1TableAdapters.Spare_partsTableAdapter spare_partsTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idsparepartsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn costDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }

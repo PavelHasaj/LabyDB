@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace LabyDB
 {
@@ -27,9 +28,9 @@ namespace LabyDB
             connection.Open();
 
             SqlCommand comand = new SqlCommand("Insert Into Spare_parts Values (@Id_spare_parts, @Name, @Cost)", connection);
-            comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt64(textBox1.Text));
+            comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt32(textBox1.Text));
             comand.Parameters.AddWithValue("@Name", comboBox1.Text);
-            comand.Parameters.AddWithValue("@Cost", Convert.ToInt64(textBox3.Text));
+            comand.Parameters.AddWithValue("@Cost", Convert.ToInt32(textBox3.Text));
 
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
@@ -80,10 +81,49 @@ namespace LabyDB
         }
 
         private void Form5_Load(object sender, EventArgs e){
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Spare_parts". При необходимости она может быть перемещена или удалена.
+            this.spare_partsTableAdapter.Fill(this.sampleDatabaseDataSet1.Spare_parts);
             DatabaseUpdate();
 
             //Запчасти
+            comboBox1.Items.Add("Ароматизатор Елочка Аромат ванили Car-Freshner U1P-10105-RUSS");
+            comboBox1.Items.Add("Ароматизатор Елочка Бабл гам Car-Freshner U1P-10348-RUSS");
+            comboBox1.Items.Add("Ароматизатор Елочка Новая машина Car-Freshner U1P-10189-RUSS");
+            comboBox1.Items.Add("Ароматизатор Елочка Пина колада Car-Freshner U1P-10967-RUSS");
+            comboBox1.Items.Add("Ароматизатор Елочка Черный лед США 10155");
+            comboBox1.Items.Add("Ароматизатор меловой SPIRIT REFILL самурай EIKOSHA");
+            comboBox1.Items.Add("Ароматизатор меловой SPIRIT REFILL свежесть EIKOSHA");
+            comboBox1.Items.Add("Ароматизатор подвесной, французский парфюм №6 Sexy aromatique");
+            comboBox1.Items.Add("Ароматизатор подвесной, французский парфюм №17 Egoïste platine");
+            comboBox1.Items.Add("Ароматизатор подвесной, французский парфюм №18 Esprit de légende");
+            comboBox1.Items.Add("Базовый комплект ароматизации воздуха в салоне BMW Natural Air");
+            comboBox1.Items.Add("Герметик REINZOSIL 70мл универсальный");
+            comboBox1.Items.Add("Долговременная дизельная присадка");
+            comboBox1.Items.Add("Коврики в салон AUTOPROFI синие");
+            comboBox1.Items.Add("Масло моторное Mobil Super 3000 X1, 4л");
+            comboBox1.Items.Add("Масляный фильтр Mann-Filter");
+            comboBox1.Items.Add("Мастер-смазка «ВАЛЕРА», 400мл");
+            comboBox1.Items.Add("Многофункциональная очищающая присадка в бензин СУПРОТЕК А-Прохим SGA (СГА), 2х50 мл");
+            comboBox1.Items.Add("Оплетка SKYWAY Corset M Черная экокожа");
+            comboBox1.Items.Add("Оплетка на рулевое колесо AVS GL-165M-B Size M натуральная кожа 37-39 см. черный");
+            comboBox1.Items.Add("Оплетка на рулевое колесо M 38см натуральная кожа черная A0501005");
+            comboBox1.Items.Add("Оплетка на рулевое колесо M 38см натуральная кожа черная A0501016");
+            comboBox1.Items.Add("Очиститель инжекторов В бензин на 40-60 л");
+            comboBox1.Items.Add("Очиститель инжекторов быстрого действия на 60 л");
+            comboBox1.Items.Add("Очиститель форсунок и деталей топливной системы Injection System Purge на 1л");
+            comboBox1.Items.Add("Присадка в топливо");
+            comboBox1.Items.Add("Промывка инжекторной системы бензинового двигателя ML101 Euro на 1 л");
+            comboBox1.Items.Add("Промывка инжекторной системы бензинового двигателя ML101 на 1 л");
+            comboBox1.Items.Add("Промывочное масло Лукойл на 4л");
+            comboBox1.Items.Add("Свеча зажигания Denso 3120");
             comboBox1.Items.Add("Свеча накаливания");
+            comboBox1.Items.Add("Смазка ШРУС-триподный, 90мл стик-пакет");
+            comboBox1.Items.Add("Смазка для направляющих суппорта МС 1630, 5г стик-пакет");
+            comboBox1.Items.Add("Смазка медная, 520мл");
+            comboBox1.Items.Add("Смазка пластичная для направляющих, 25гр");
+            comboBox1.Items.Add("Сменный картридж BMW Natural Air с ароматом Sparkling Raindrops");
+            comboBox1.Items.Add("Средство универсальное WD-40® для тысячи применений на работе и в быту 100мл");
+            comboBox1.Items.Add("Средство универсальное WD-40® для тысячи применений на работе и в быту 200мл");
             comboBox1.Items.Add("Фильтр воздушный");
             comboBox1.Items.Add("Фильтр масляный");
             comboBox1.Items.Add("Фильтр салона, пылевой");
@@ -92,6 +132,11 @@ namespace LabyDB
             comboBox1.Items.Add("Щётка стеклоочистителя, задняя");
             comboBox1.Items.Add("Щётки стеклоочистителя, комплект");
             comboBox1.Items.Add("Другое");
+
+            ToolTip t = new ToolTip();
+            t.SetToolTip(button1, "Нажмите чтобы добавить новую запись.");
+            t.SetToolTip(button3, "Нажмите чтобы изменить существующую запись.");
+            t.SetToolTip(button7, "Нажмите чтобы удалить существующую запись.");
         }
         //Кнопка добавить
         private void button1_Click(object sender, EventArgs e){
@@ -125,43 +170,234 @@ namespace LabyDB
             this.Hide();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
+            //Вывод подсказки
+            object _dt = null;
+            comboBox1.DataSource = _dt;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+
             //Вывод номера и цены запчасти
             if (comboBox1.SelectedIndex == 0){
                 name = 1;
-                cost = 1971;
+                cost = 82;
             }
             else if (comboBox1.SelectedIndex == 1){
                 name = 2;
-                cost = 1294;
+                cost = 54;
             }
             else if (comboBox1.SelectedIndex == 2){
                 name = 3;
-                cost = 711;
+                cost = 111;
             }
             else if (comboBox1.SelectedIndex == 3){
                 name = 4;
-                cost = 1614;
+                cost = 150;
             }
             else if (comboBox1.SelectedIndex == 4){
                 name = 5;
-                cost = 3873;
+                cost = 96;
             }
             else if (comboBox1.SelectedIndex == 5){
                 name = 6;
-                cost = 1824;
+                cost = 58;
             }
             else if (comboBox1.SelectedIndex == 6){
                 name = 7;
-                cost = 709;
+                cost = 90;
             }
             else if (comboBox1.SelectedIndex == 7){
                 name = 8;
-                cost = 2832;
+                cost = 68;
             }
-            else if (comboBox1.SelectedIndex == 8){
-                name = 0;
+            else if (comboBox1.SelectedIndex == 8)
+            {
+                name = 9;
+                cost = 94;
+            }
+            else if (comboBox1.SelectedIndex == 9)
+            {
+                name = 10;
+                cost = 60;
+            }
+            else if (comboBox1.SelectedIndex == 10)
+            {
+                name = 11;
+                cost = 576;
+            }
+            else if (comboBox1.SelectedIndex == 11)
+            {
+                name = 12;
+                cost = 731;
+            }
+            else if (comboBox1.SelectedIndex == 12)
+            {
+                name = 13;
+                cost = 494;
+            }
+            else if (comboBox1.SelectedIndex == 13)
+            {
+                name = 14;
+                cost = 173;
+            }
+            else if (comboBox1.SelectedIndex == 14)
+            {
+                name = 15;
+                cost = 498;
+            }
+            else if (comboBox1.SelectedIndex == 15)
+            {
+                name = 16;
+                cost = 414;
+            }
+            else if (comboBox1.SelectedIndex == 16)
+            {
+                name = 17;
+                cost = 534;
+            }
+            else if (comboBox1.SelectedIndex == 17)
+            {
+                name = 18;
+                cost = 453;
+            }
+            else if (comboBox1.SelectedIndex == 18)
+            {
+                name = 19;
+                cost = 865;
+            }
+            else if (comboBox1.SelectedIndex == 19)
+            {
+                name = 20;
+                cost = 364;
+            }
+            else if (comboBox1.SelectedIndex == 20)
+            {
+                name = 21;
+                cost = 964;
+            }
+            else if (comboBox1.SelectedIndex == 21)
+            {
+                name = 22;
+                cost = 457;
+            }
+            else if (comboBox1.SelectedIndex == 22)
+            {
+                name = 23;
+                cost = 257;
+            }
+            else if (comboBox1.SelectedIndex == 23)
+            {
+                name = 24;
+                cost = 653;
+            }
+            else if (comboBox1.SelectedIndex == 24)
+            {
+                name = 25;
+                cost = 342;
+            }
+            else if (comboBox1.SelectedIndex == 25)
+            {
+                name = 26;
+                cost = 2345;
+            }
+            else if (comboBox1.SelectedIndex == 26)
+            {
+                name = 27;
+                cost = 753;
+            }
+            else if (comboBox1.SelectedIndex == 27)
+            {
+                name = 28;
+                cost = 2532;
+            }
+            else if (comboBox1.SelectedIndex == 28)
+            {
+                name = 29;
+                cost = 643;
+            }
+            else if (comboBox1.SelectedIndex == 29)
+            {
+                name = 30;
+                cost = 343;
+            }
+            else if (comboBox1.SelectedIndex == 30)
+            {
+                name = 31;
+                cost = 121;
+            }
+            else if (comboBox1.SelectedIndex == 31)
+            {
+                name = 32;
+                cost = 432;
+            }
+            else if (comboBox1.SelectedIndex == 32)
+            {
+                name = 33;
+                cost = 870;
+            }
+            else if (comboBox1.SelectedIndex == 33)
+            {
+                name = 34;
+                cost = 2567;
+            }
+            else if (comboBox1.SelectedIndex == 34)
+            {
+                name = 35;
+                cost = 2893;
+            }
+            else if (comboBox1.SelectedIndex == 35)
+            {
+                name = 36;
+                cost = 2086;
+            }
+            else if (comboBox1.SelectedIndex == 36)
+            {
+                name = 37;
+                cost = 2589;
+            }
+            else if (comboBox1.SelectedIndex == 37)
+            {
+                name = 38;
+                cost = 354;
+            }
+            else if (comboBox1.SelectedIndex == 38)
+            {
+                name = 39;
+                cost = 876;
+            }
+            else if (comboBox1.SelectedIndex == 39)
+            {
+                name = 40;
+                cost = 577;
+            }
+            else if (comboBox1.SelectedIndex == 40)
+            {
+                name = 41;
+                cost = 468;
+            }
+            else if (comboBox1.SelectedIndex == 41)
+            {
+                name = 42;
+                cost = 853;
+            }
+            else if (comboBox1.SelectedIndex == 42)
+            {
+                name = 43;
+                cost = 572;
+            }
+            else if (comboBox1.SelectedIndex == 43)
+            {
+                name = 44;
+                cost = 950;
+            }
+            else if (comboBox1.SelectedIndex == 44)
+            {
+                name = 45;
+                cost = 876;
+            }
+            else if (comboBox1.SelectedIndex == 45)
+            {
+                name = 46;
                 cost = 0;
             }
 
@@ -201,6 +437,74 @@ namespace LabyDB
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("Select * From Spare_parts where Cost>@Cost", connection);
+            command_select.Parameters.AddWithValue("@Cost", Convert.ToInt32(textBox5.Text));
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
+
+        private void comboBox1_Click(object sender, EventArgs e)
+        {
+            //Вывод подсказки
+            object _dt = null;
+            comboBox1.DataSource = _dt;
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
+            object misValue = System.Reflection.Missing.Value;
+
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            xlWorkBook = xlApp.Workbooks.Open(@"Q:\\otchet", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+
+            for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                {
+                    xlApp.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+                    (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+                }
+            }
+            xlApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Скопинцев Олег Данилович ";
+
+
+            xlApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Size = 14;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
+            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+
+
+            xlApp.Visible = true;
+            xlApp.UserControl = true;
         }
     }
 }
