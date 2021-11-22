@@ -20,6 +20,14 @@ namespace LabyDB
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+
+            dataGridView1.Columns[0].HeaderText = "Id";
+            dataGridView1.Columns[1].HeaderText = "Гос. номер";
+            dataGridView1.Columns[2].HeaderText = "Id услуги";
+            dataGridView1.Columns[3].HeaderText = "Id запчасти";
+            dataGridView1.Columns[4].HeaderText = "Дата готовности";
+            dataGridView1.Columns[5].HeaderText = "Наценка";
+            dataGridView1.Columns[6].HeaderText = "Итоговая цена";
         }
         //Добавление записи
         void DataAdd(){

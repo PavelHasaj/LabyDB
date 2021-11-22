@@ -22,6 +22,11 @@ namespace LabyDB {
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+
+            dataGridView1.Columns[0].HeaderText = "Id владельца";
+            dataGridView1.Columns[1].HeaderText = "ФИО";
+            dataGridView1.Columns[2].HeaderText = "Номер телефона";
+            dataGridView1.Columns[3].HeaderText = "Номер лицевого счета";
         }
         //Добавление записи
         void DataAdd(){
@@ -68,7 +73,6 @@ namespace LabyDB {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-
 
             DatabaseUpdate();
 

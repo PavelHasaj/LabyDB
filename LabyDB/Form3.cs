@@ -19,6 +19,10 @@ namespace LabyDB
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+
+            dataGridView1.Columns[0].HeaderText = "Id владельца";
+            dataGridView1.Columns[1].HeaderText = "Гос. номер";
+            dataGridView1.Columns[2].HeaderText = "Марка машины";
         }
         //Добавление записи
         void DataAdd(){

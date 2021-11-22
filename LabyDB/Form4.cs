@@ -19,6 +19,10 @@ namespace LabyDB
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+
+            dataGridView1.Columns[0].HeaderText = "Id услуги";
+            dataGridView1.Columns[1].HeaderText = "Наименование";
+            dataGridView1.Columns[2].HeaderText = "Цена";
         }
         //Добавление записи
         void DataAdd(){
