@@ -24,15 +24,8 @@ namespace LabyDB {
         /// содержимое этого метода с помощью редактора кода.
         /// </summary>
         private void InitializeComponent() {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idownerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fIODataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phonenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.driverlicensenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ownerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,30 +42,20 @@ namespace LabyDB {
             this.button4 = new System.Windows.Forms.Button();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button7 = new System.Windows.Forms.Button();
-            this.ownerTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.OwnerTableAdapter();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ownerBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idownerDataGridViewTextBoxColumn,
-            this.fIODataGridViewTextBoxColumn,
-            this.phonenumberDataGridViewTextBoxColumn,
-            this.driverlicensenumberDataGridViewTextBoxColumn});
             this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dataGridView1.DataSource = this.ownerBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -80,42 +63,6 @@ namespace LabyDB {
             this.dataGridView1.Size = new System.Drawing.Size(854, 258);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // idownerDataGridViewTextBoxColumn
-            // 
-            this.idownerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.idownerDataGridViewTextBoxColumn.DataPropertyName = "Id_owner";
-            this.idownerDataGridViewTextBoxColumn.HeaderText = "id владельца";
-            this.idownerDataGridViewTextBoxColumn.Name = "idownerDataGridViewTextBoxColumn";
-            this.idownerDataGridViewTextBoxColumn.Width = 89;
-            // 
-            // fIODataGridViewTextBoxColumn
-            // 
-            this.fIODataGridViewTextBoxColumn.DataPropertyName = "FIO";
-            this.fIODataGridViewTextBoxColumn.HeaderText = "ФИО";
-            this.fIODataGridViewTextBoxColumn.Name = "fIODataGridViewTextBoxColumn";
-            // 
-            // phonenumberDataGridViewTextBoxColumn
-            // 
-            this.phonenumberDataGridViewTextBoxColumn.DataPropertyName = "Phone_number";
-            this.phonenumberDataGridViewTextBoxColumn.HeaderText = "Номер телефона";
-            this.phonenumberDataGridViewTextBoxColumn.Name = "phonenumberDataGridViewTextBoxColumn";
-            // 
-            // driverlicensenumberDataGridViewTextBoxColumn
-            // 
-            this.driverlicensenumberDataGridViewTextBoxColumn.DataPropertyName = "Driver_license_number";
-            this.driverlicensenumberDataGridViewTextBoxColumn.HeaderText = "Номер водительского удостоверения";
-            this.driverlicensenumberDataGridViewTextBoxColumn.Name = "driverlicensenumberDataGridViewTextBoxColumn";
-            // 
-            // ownerBindingSource
-            // 
-            this.ownerBindingSource.DataMember = "Owner";
-            this.ownerBindingSource.DataSource = this.sampleDatabaseDataSet1;
-            // 
-            // sampleDatabaseDataSet1
-            // 
-            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
-            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // textBox1
             // 
@@ -287,10 +234,6 @@ namespace LabyDB {
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
-            // ownerTableAdapter
-            // 
-            this.ownerTableAdapter.ClearBeforeFill = true;
-            // 
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.SystemColors.Menu;
@@ -349,8 +292,6 @@ namespace LabyDB {
             this.Text = "Владельцы";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ownerBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,13 +316,6 @@ namespace LabyDB {
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button7;
-        private SampleDatabaseDataSet1 sampleDatabaseDataSet1;
-        private System.Windows.Forms.BindingSource ownerBindingSource;
-        private SampleDatabaseDataSet1TableAdapters.OwnerTableAdapter ownerTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idownerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fIODataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn phonenumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn driverlicensenumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button9;
     }

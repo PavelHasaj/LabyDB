@@ -8,17 +8,20 @@ namespace LabyDB {
         }
         //Кнопка клиенты
         private void Form2_open_button(object sender, EventArgs e) {
-            Program.form2.Show();
+            Form2 form2 = new Form2();
+            form2.Show();
             this.Hide();
         }
         //Кнопка автомобили
         private void button2_Click(object sender, EventArgs e){
-            Program.form3.Show();
+            Form3 form3 = new Form3();
+            form3.Show();
             this.Hide();
         }
         //Кнопка сервис
         private void button3_Click(object sender, EventArgs e){
-            Program.form6.Show();
+            Form6 form6 = new Form6();
+            form6.Show();
             this.Hide();
         }
 
@@ -34,17 +37,20 @@ namespace LabyDB {
         }
         //Кнопка запчасти
         private void button5_Click(object sender, EventArgs e){
-            Program.form5.Show();
+            Form5 form5 = new Form5();
+            form5.Show();
             this.Hide();
         }
         //Кнопка услуги
         private void button4_Click(object sender, EventArgs e){
-            Program.form4.Show();
+            Form4 form4 = new Form4();
+            form4.Show();
             this.Hide();
         }
         //Кнопка выход
         private void button6_Click(object sender, EventArgs e){
-            Program.form7.Show();
+            Form8 form7 = new Form8();
+            form7.Show();
             this.Hide();
         }
 

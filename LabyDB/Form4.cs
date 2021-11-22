@@ -73,17 +73,19 @@ namespace LabyDB
         //Кнопка выход на главную
         private void button5_Click(object sender, EventArgs e){
             Program.form1.Show();
-            this.Hide();
+            this.Close(); ;
         }
         //Кнопка назад
         private void button4_Click(object sender, EventArgs e){
-            Program.form5.Show();
-            this.Hide();
+            Form5 form5 = new Form5();
+            form5.Show();
+            this.Close();
         }
         //Кнопка вперед
         private void button6_Click(object sender, EventArgs e){
-            Program.form6.Show();
-            this.Hide();
+            Form6  form6= new Form6();
+            form6.Show();
+            this.Close();
         }
         //Кнопка удалить
         private void button7_Click(object sender, EventArgs e){
@@ -95,8 +97,6 @@ namespace LabyDB
         int cost;
 
         private void Form4_Load(object sender, EventArgs e){
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Services". При необходимости она может быть перемещена или удалена.
-            this.servicesTableAdapter.Fill(this.sampleDatabaseDataSet1.Services);
             DatabaseUpdate();
 
             //Услуги

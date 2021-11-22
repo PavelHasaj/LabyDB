@@ -72,14 +72,13 @@ namespace LabyDB
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Program.form1.Show();
-            this.Hide();
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Close();
         }
 
         private void Form8_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.users". При необходимости она может быть перемещена или удалена.
-            this.usersTableAdapter.Fill(this.sampleDatabaseDataSet1.users);
             DatabaseUpdate();
         }
 

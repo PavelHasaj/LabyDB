@@ -68,8 +68,8 @@ namespace LabyDB {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Owner". При необходимости она может быть перемещена или удалена.
-            this.ownerTableAdapter.Fill(this.sampleDatabaseDataSet1.Owner);
+
+
             DatabaseUpdate();
 
             //Имена
@@ -291,6 +291,8 @@ namespace LabyDB {
         //Кнопка добавить
         private void add_button(object sender, EventArgs e) {
             DataAdd();
+
+            DatabaseUpdate();
         }
         //Кнопка изменить
         private void data_change_button(object sender, EventArgs e) {
@@ -303,8 +305,9 @@ namespace LabyDB {
         //Кнопка вперед
         private void button6_Click(object sender, EventArgs e)
         {
-            Program.form3.Show();
-            this.Hide();
+            Form3 form3 = new Form3();
+            form3.Show();
+            this.Close();
         }
         //Кнопка обновить
         private void button8_Click(object sender, EventArgs e)
@@ -315,7 +318,7 @@ namespace LabyDB {
         private void button5_Click(object sender, EventArgs e)
         {
             Program.form1.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void button4_Click(object sender, EventArgs e)

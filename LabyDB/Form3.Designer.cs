@@ -29,7 +29,6 @@ namespace LabyDB
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -39,11 +38,6 @@ namespace LabyDB
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idownerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.carbrandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.carsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,11 +47,8 @@ namespace LabyDB
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
-            this.carsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.CarsTableAdapter();
             this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // button4
@@ -147,55 +138,19 @@ namespace LabyDB
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idownerDataGridViewTextBoxColumn,
-            this.statenumberDataGridViewTextBoxColumn,
-            this.carbrandDataGridViewTextBoxColumn});
             this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dataGridView1.DataSource = this.carsBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(854, 258);
             this.dataGridView1.TabIndex = 22;
-            // 
-            // idownerDataGridViewTextBoxColumn
-            // 
-            this.idownerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.idownerDataGridViewTextBoxColumn.DataPropertyName = "Id_owner";
-            this.idownerDataGridViewTextBoxColumn.HeaderText = "id владельца";
-            this.idownerDataGridViewTextBoxColumn.Name = "idownerDataGridViewTextBoxColumn";
-            this.idownerDataGridViewTextBoxColumn.Width = 89;
-            // 
-            // statenumberDataGridViewTextBoxColumn
-            // 
-            this.statenumberDataGridViewTextBoxColumn.DataPropertyName = "State_number";
-            this.statenumberDataGridViewTextBoxColumn.HeaderText = "Государственный номер";
-            this.statenumberDataGridViewTextBoxColumn.Name = "statenumberDataGridViewTextBoxColumn";
-            // 
-            // carbrandDataGridViewTextBoxColumn
-            // 
-            this.carbrandDataGridViewTextBoxColumn.DataPropertyName = "Car_brand";
-            this.carbrandDataGridViewTextBoxColumn.HeaderText = "Марка машины";
-            this.carbrandDataGridViewTextBoxColumn.Name = "carbrandDataGridViewTextBoxColumn";
-            // 
-            // carsBindingSource
-            // 
-            this.carsBindingSource.DataMember = "Cars";
-            this.carsBindingSource.DataSource = this.sampleDatabaseDataSet1;
-            // 
-            // sampleDatabaseDataSet1
-            // 
-            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
-            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label2
             // 
@@ -235,7 +190,6 @@ namespace LabyDB
             // textBox2
             // 
             this.textBox2.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.carsBindingSource, "State_number", true));
             this.textBox2.Location = new System.Drawing.Point(116, 310);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(309, 20);
@@ -288,10 +242,6 @@ namespace LabyDB
             this.button9.UseVisualStyleBackColor = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
-            // carsTableAdapter
-            // 
-            this.carsTableAdapter.ClearBeforeFill = true;
-            // 
             // button10
             // 
             this.button10.BackColor = System.Drawing.SystemColors.Menu;
@@ -338,8 +288,6 @@ namespace LabyDB
             this.Text = "Автомобили";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,12 +311,6 @@ namespace LabyDB
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button9;
-        private SampleDatabaseDataSet1 sampleDatabaseDataSet1;
-        private System.Windows.Forms.BindingSource carsBindingSource;
-        private SampleDatabaseDataSet1TableAdapters.CarsTableAdapter carsTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idownerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statenumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn carbrandDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button button10;
     }
 }

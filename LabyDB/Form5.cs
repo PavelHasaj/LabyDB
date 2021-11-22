@@ -81,8 +81,6 @@ namespace LabyDB
         }
 
         private void Form5_Load(object sender, EventArgs e){
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Spare_parts". При необходимости она может быть перемещена или удалена.
-            this.spare_partsTableAdapter.Fill(this.sampleDatabaseDataSet1.Spare_parts);
             DatabaseUpdate();
 
             //Запчасти
@@ -157,17 +155,19 @@ namespace LabyDB
         //Кнопка выход на главную
         private void button5_Click(object sender, EventArgs e){
             Program.form1.Show();
-            this.Hide();
+            this.Close();
         }
         //Кнопка назад
         private void button4_Click(object sender, EventArgs e){
-            Program.form3.Show();
-            this.Hide();
+            Form3 form3 = new Form3();
+            form3.Show();
+            this.Close();
         }
         //Кнопка вперед
         private void button6_Click(object sender, EventArgs e){
-            Program.form4.Show();
-            this.Hide();
+            Form4 form4 = new Form4();
+            form4.Show();
+            this.Close();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
@@ -505,6 +505,11 @@ namespace LabyDB
 
             xlApp.Visible = true;
             xlApp.UserControl = true;
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

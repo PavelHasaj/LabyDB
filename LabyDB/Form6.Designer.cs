@@ -44,39 +44,30 @@ namespace LabyDB
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.carsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
             this.button6 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.servicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.sparepartsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.carsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.CarsTableAdapter();
-            this.servicesTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.ServicesTableAdapter();
-            this.spare_partsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.Spare_partsTableAdapter();
             this.button2 = new System.Windows.Forms.Button();
-            this.serviceBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.serviceTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.ServiceTableAdapter();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statenumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idservicesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idsparepartsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.readydateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalcostDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button10 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).BeginInit();
+            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
+            this.carsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.carsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.CarsTableAdapter();
+            this.servicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.servicesTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.ServicesTableAdapter();
+            this.sparepartsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.spare_partsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.Spare_partsTableAdapter();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.servicesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparepartsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.serviceBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // button8
@@ -212,16 +203,6 @@ namespace LabyDB
             this.comboBox1.TabIndex = 62;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // carsBindingSource
-            // 
-            this.carsBindingSource.DataMember = "Cars";
-            this.carsBindingSource.DataSource = this.sampleDatabaseDataSet1;
-            // 
-            // sampleDatabaseDataSet1
-            // 
-            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
-            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.SystemColors.Menu;
@@ -274,12 +255,6 @@ namespace LabyDB
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(309, 21);
             this.comboBox2.TabIndex = 67;
-            this.comboBox2.ValueMember = "Name";
-            // 
-            // servicesBindingSource
-            // 
-            this.servicesBindingSource.DataMember = "Services";
-            this.servicesBindingSource.DataSource = this.sampleDatabaseDataSet1;
             // 
             // comboBox3
             // 
@@ -291,12 +266,6 @@ namespace LabyDB
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(309, 21);
             this.comboBox3.TabIndex = 68;
-            this.comboBox3.ValueMember = "Name";
-            // 
-            // sparepartsBindingSource
-            // 
-            this.sparepartsBindingSource.DataMember = "Spare_parts";
-            this.sparepartsBindingSource.DataSource = this.sampleDatabaseDataSet1;
             // 
             // button1
             // 
@@ -323,22 +292,13 @@ namespace LabyDB
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SunkenHorizontal;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.statenumberDataGridViewTextBoxColumn,
-            this.idservicesDataGridViewTextBoxColumn,
-            this.idsparepartsDataGridViewTextBoxColumn,
-            this.readydateDataGridViewTextBoxColumn,
-            this.totalcostDataGridViewTextBoxColumn});
             this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dataGridView1.DataSource = this.serviceBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
@@ -356,18 +316,7 @@ namespace LabyDB
             this.textBox2.TabIndex = 73;
             this.textBox2.Text = "Поиск и фильтрация:";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // carsTableAdapter
-            // 
-            this.carsTableAdapter.ClearBeforeFill = true;
-            // 
-            // servicesTableAdapter
-            // 
-            this.servicesTableAdapter.ClearBeforeFill = true;
-            // 
-            // spare_partsTableAdapter
-            // 
-            this.spare_partsTableAdapter.ClearBeforeFill = true;
+            this.textBox2.Click += new System.EventHandler(this.textBox2_Clear);
             // 
             // button2
             // 
@@ -381,51 +330,6 @@ namespace LabyDB
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // serviceBindingSource
-            // 
-            this.serviceBindingSource.DataMember = "Service";
-            this.serviceBindingSource.DataSource = this.sampleDatabaseDataSet1;
-            // 
-            // serviceTableAdapter
-            // 
-            this.serviceTableAdapter.ClearBeforeFill = true;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // statenumberDataGridViewTextBoxColumn
-            // 
-            this.statenumberDataGridViewTextBoxColumn.DataPropertyName = "State_number";
-            this.statenumberDataGridViewTextBoxColumn.HeaderText = "Государственный номер";
-            this.statenumberDataGridViewTextBoxColumn.Name = "statenumberDataGridViewTextBoxColumn";
-            // 
-            // idservicesDataGridViewTextBoxColumn
-            // 
-            this.idservicesDataGridViewTextBoxColumn.DataPropertyName = "Id_services";
-            this.idservicesDataGridViewTextBoxColumn.HeaderText = "Id услуги";
-            this.idservicesDataGridViewTextBoxColumn.Name = "idservicesDataGridViewTextBoxColumn";
-            // 
-            // idsparepartsDataGridViewTextBoxColumn
-            // 
-            this.idsparepartsDataGridViewTextBoxColumn.DataPropertyName = "Id_spare_parts";
-            this.idsparepartsDataGridViewTextBoxColumn.HeaderText = "Id запчасти";
-            this.idsparepartsDataGridViewTextBoxColumn.Name = "idsparepartsDataGridViewTextBoxColumn";
-            // 
-            // readydateDataGridViewTextBoxColumn
-            // 
-            this.readydateDataGridViewTextBoxColumn.DataPropertyName = "Ready_date";
-            this.readydateDataGridViewTextBoxColumn.HeaderText = "Дата готовности";
-            this.readydateDataGridViewTextBoxColumn.Name = "readydateDataGridViewTextBoxColumn";
-            // 
-            // totalcostDataGridViewTextBoxColumn
-            // 
-            this.totalcostDataGridViewTextBoxColumn.DataPropertyName = "Total_cost";
-            this.totalcostDataGridViewTextBoxColumn.HeaderText = "Итоговая цена";
-            this.totalcostDataGridViewTextBoxColumn.Name = "totalcostDataGridViewTextBoxColumn";
-            // 
             // button10
             // 
             this.button10.BackColor = System.Drawing.SystemColors.Menu;
@@ -437,6 +341,38 @@ namespace LabyDB
             this.button10.Text = "Фильтрация цены";
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // sampleDatabaseDataSet1
+            // 
+            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
+            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // carsBindingSource
+            // 
+            this.carsBindingSource.DataMember = "Cars";
+            this.carsBindingSource.DataSource = this.sampleDatabaseDataSet1;
+            // 
+            // carsTableAdapter
+            // 
+            this.carsTableAdapter.ClearBeforeFill = true;
+            // 
+            // servicesBindingSource
+            // 
+            this.servicesBindingSource.DataMember = "Services";
+            this.servicesBindingSource.DataSource = this.sampleDatabaseDataSet1;
+            // 
+            // servicesTableAdapter
+            // 
+            this.servicesTableAdapter.ClearBeforeFill = true;
+            // 
+            // sparepartsBindingSource
+            // 
+            this.sparepartsBindingSource.DataMember = "Spare_parts";
+            this.sparepartsBindingSource.DataSource = this.sampleDatabaseDataSet1;
+            // 
+            // spare_partsTableAdapter
+            // 
+            this.spare_partsTableAdapter.ClearBeforeFill = true;
             // 
             // Form6
             // 
@@ -478,12 +414,11 @@ namespace LabyDB
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сервис";
             this.Load += new System.EventHandler(this.Form6_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.servicesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparepartsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.serviceBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -513,6 +448,8 @@ namespace LabyDB
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button10;
         private SampleDatabaseDataSet1 sampleDatabaseDataSet1;
         private System.Windows.Forms.BindingSource carsBindingSource;
         private SampleDatabaseDataSet1TableAdapters.CarsTableAdapter carsTableAdapter;
@@ -520,15 +457,5 @@ namespace LabyDB
         private SampleDatabaseDataSet1TableAdapters.ServicesTableAdapter servicesTableAdapter;
         private System.Windows.Forms.BindingSource sparepartsBindingSource;
         private SampleDatabaseDataSet1TableAdapters.Spare_partsTableAdapter spare_partsTableAdapter;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.BindingSource serviceBindingSource;
-        private SampleDatabaseDataSet1TableAdapters.ServiceTableAdapter serviceTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statenumberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idservicesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idsparepartsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn readydateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalcostDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button button10;
     }
 }

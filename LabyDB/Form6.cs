@@ -61,7 +61,7 @@ namespace LabyDB
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-            SqlCommand comand = new SqlCommand("SELECT Service.Id, Service.State_number, Service.Id_services, Service.Id_spare_parts, Service.Ready_date, Service.Nacenka, Services.Cost + Spare_parts.Cost AS Total_cost FROM (Service INNER JOIN Services ON Service.Id_services = Services.Id_services) LEFT JOIN Spare_parts ON Service.Id_spare_parts = Spare_parts.Id_spare_parts WHERE Service.State_number = Service.State_number", connection);
+            SqlCommand comand = new SqlCommand("Update Service SET Total_cost = Services.Cost + Spare_parts.Cost FROM (Service INNER JOIN Services ON Service.Id_services = Services.Id_services LEFT JOIN Spare_parts ON Service.Id_spare_parts = Spare_parts.Id_spare_parts)", connection);
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
@@ -108,14 +108,13 @@ namespace LabyDB
         }
 
         private void Form6_Load(object sender, EventArgs e){
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Service". При необходимости она может быть перемещена или удалена.
-            this.serviceTableAdapter.Fill(this.sampleDatabaseDataSet1.Service);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Spare_parts". При необходимости она может быть перемещена или удалена.
             this.spare_partsTableAdapter.Fill(this.sampleDatabaseDataSet1.Spare_parts);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Services". При необходимости она может быть перемещена или удалена.
             this.servicesTableAdapter.Fill(this.sampleDatabaseDataSet1.Services);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Cars". При необходимости она может быть перемещена или удалена.
             this.carsTableAdapter.Fill(this.sampleDatabaseDataSet1.Cars);
+
             DatabaseUpdate();
             textBox3.Enabled = false;//недоступность
             textBox3.Visible = false;//скрытие поля ввода
@@ -132,6 +131,9 @@ namespace LabyDB
         //Кнопка добавить
         private void button1_Click(object sender, EventArgs e){
             DataAdd();
+            DataDB2();
+            DataDB();
+            DatabaseUpdate();
         }
         //Кнопка изменить
         private void button3_Click(object sender, EventArgs e){
@@ -143,13 +145,15 @@ namespace LabyDB
         }
         //Кнопка назад
         private void button4_Click(object sender, EventArgs e){
-            Program.form4.Show();
-            this.Hide();
+            Form4 form4 = new Form4();
+            form4.Show();
+            this.Close();
         }
         //Кнопка выход на главную
         private void button5_Click(object sender, EventArgs e){
-            Program.form1.Show();
-            this.Hide();
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Close();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

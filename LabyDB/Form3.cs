@@ -75,13 +75,10 @@ namespace LabyDB
         private void button1_Click(object sender, EventArgs e){
             DataAdd();
 
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = dataSet.Tables[0];
-        }
+            DatabaseUpdate();
+            }
 
         private void Form3_Load(object sender, EventArgs e){
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Cars". При необходимости она может быть перемещена или удалена.
-            this.carsTableAdapter.Fill(this.sampleDatabaseDataSet1.Cars);
             DatabaseUpdate();
 
             //Марки машины
@@ -147,20 +144,22 @@ namespace LabyDB
 
         //Кнопка назад
         private void button4_Click(object sender, EventArgs e){
-            Program.form2.Show();
-            this.Hide();
+            Form2 form2 = new Form2();
+            form2.Show();
+            this.Close();
         }
 
         //Кнопка выход на главную
         private void button5_Click(object sender, EventArgs e){
             Program.form1.Show();
-            this.Hide();
+            this.Close();
         }
 
         //Кнопка вперед
         private void button6_Click(object sender, EventArgs e){
-            Program.form5.Show();
-            this.Hide();
+            Form5 form5 = new Form5();
+            form5.Show();
+            this.Close();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
