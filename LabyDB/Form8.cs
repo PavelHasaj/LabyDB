@@ -2,16 +2,14 @@
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
-namespace LabyDB
-{
+namespace LabyDB{
     public partial class Form8 : Form{
         //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
         //Обновление
-        private void DatabaseUpdate()
-        {
+        private void DatabaseUpdate(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -22,8 +20,7 @@ namespace LabyDB
             connection.Close();
         }
         //Добавление записи
-        void DataAdd()
-        {
+        void DataAdd(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -38,8 +35,7 @@ namespace LabyDB
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
         //Изменение записи
-        void DataChange()
-        {
+        void DataChange(){
             SqlCommand command = new SqlCommand("Update users set login=@login, pass=@pass Where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
@@ -53,8 +49,7 @@ namespace LabyDB
             DatabaseUpdate();
         }
         //Удаление записи
-        void DataDelete()
-        {
+        void DataDelete(){
             SqlCommand command = new SqlCommand("Delete From users where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
@@ -65,55 +60,45 @@ namespace LabyDB
             connection.Close();
             DatabaseUpdate();
         }
-        public Form8()
-        {
+        public Form8(){
             InitializeComponent();
         }
 
-        private void button5_Click(object sender, EventArgs e)
-        {
+        private void button5_Click(object sender, EventArgs e){
             Form1 form1 = new Form1();
             form1.Show();
             this.Close();
         }
 
-        private void Form8_Load(object sender, EventArgs e)
-        {
+        private void Form8_Load(object sender, EventArgs e){
             DatabaseUpdate();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+        private void button1_Click(object sender, EventArgs e){
             DataAdd();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
+        private void button3_Click(object sender, EventArgs e){
             DataChange();
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
+        private void button7_Click(object sender, EventArgs e){
             DataDelete();
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
-            {
+        private void button6_Click(object sender, EventArgs e){
+            for (int i = 0; i < dataGridView1.RowCount; i++){
                 dataGridView1.Rows[i].Selected = false;
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
                     if (dataGridView1.Rows[i].Cells[j].Value != null)
-                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox2.Text))
-                        {
+                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox2.Text)){
                             dataGridView1.Rows[i].Selected = true;
                             break;
                         }
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
+        private void button8_Click(object sender, EventArgs e){
             DatabaseUpdate();
         }
     }

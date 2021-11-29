@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Microsoft.Office.Interop;
 
 namespace LabyDB
 {
@@ -21,6 +22,7 @@ namespace LabyDB
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
 
+            DeleteEmptyColumns(dataGridView1);
             dataGridView1.Columns[0].HeaderText = "Id";
             dataGridView1.Columns[1].HeaderText = "Гос. номер";
             dataGridView1.Columns[2].HeaderText = "Id услуги";
@@ -40,7 +42,7 @@ namespace LabyDB
             comand.Parameters.AddWithValue("@State_number", comboBox1.Text);
             comand.Parameters.AddWithValue("@Id_services", Convert.ToInt32(comboBox2.Text));
             comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt32(comboBox3.Text));
-            comand.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(textBox5.Text));
+            comand.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(dateTimePicker1.Text));
             comand.Parameters.AddWithValue("@Nacenka", Convert.ToInt32(textBox6.Text));
             comand.Parameters.AddWithValue("@Total_cost", Convert.ToInt32(textBox3.Text));
 
@@ -52,8 +54,7 @@ namespace LabyDB
             DatabaseUpdate();//вызов метода обновления dataGridView
         }
         //складывает наценку + сумма(услуг + цены товара)
-        void DataDB()
-        {
+        void DataDB(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -64,8 +65,7 @@ namespace LabyDB
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
-        private void DataDB2()
-        {
+        private void DataDB2(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
@@ -74,6 +74,39 @@ namespace LabyDB
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+        }
+        public static void DeleteEmptyColumns(DataGridView dataGridView1){
+            bool IsColumnEmpty;
+            for (int i = 0; i < dataGridView1.Columns.Count; i++){
+                IsColumnEmpty = dataGridView1.Rows[0].Cells[i].Value.ToString() == "";
+                if (IsColumnEmpty){
+                    dataGridView1.Columns.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+        private void Ochko(){
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand comand = new SqlCommand
+            ("SELECT Service.Id, Service.State_number, Service.Ready_date, Service.Nacenka, Services.Name, Services.Cost, Spare_parts.Name, Spare_parts.Cost, Service.Total_cost " +
+            "FROM Service INNER JOIN Services ON Service.Id_services=Services.Id_services LEFT JOIN Spare_parts ON Service.Id_spare_parts=Spare_parts.Id_spare_parts", connection);
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+
+            DeleteEmptyColumns(dataGridView1);
+            dataGridView1.Columns[0].HeaderText = "ID";
+            dataGridView1.Columns[1].HeaderText = "State_number";
+            dataGridView1.Columns[2].HeaderText = "Ready_date";
+            dataGridView1.Columns[3].HeaderText = "Nacenka";
+            dataGridView1.Columns[4].HeaderText = "Total_cost";
+            dataGridView1.Columns[5].HeaderText = "Name";
+            dataGridView1.Columns[6].HeaderText = "Cost";
+            dataGridView1.Columns[7].HeaderText = "Name";
+            dataGridView1.Columns[8].HeaderText = "Cost";
         }
         //Изменение записи
         void DataChange(){
@@ -85,7 +118,7 @@ namespace LabyDB
             command.Parameters.AddWithValue("@State_number", comboBox1.Text);
             command.Parameters.AddWithValue("@Id_services", Convert.ToInt32(comboBox2.Text));
             command.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt32(comboBox3.Text));
-            command.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(textBox5.Text));
+            command.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(dateTimePicker1.Text));
             command.Parameters.AddWithValue("@Nacenka", Convert.ToInt32(textBox6.Text));
 
             dataAdapter.SelectCommand = command;
@@ -159,112 +192,100 @@ namespace LabyDB
         }
         //Кнопка выход на главную
         private void button5_Click(object sender, EventArgs e){
-            Form1 form1 = new Form1();
-            form1.Show();
+            Form9 form9 = new Form9();
+            form9.Show();
             this.Close();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e){
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e){
         }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            for (int i = 0; i < dataGridView1.RowCount; i++)
-            {
+        private void button6_Click(object sender, EventArgs e){
+            for (int i = 0; i < dataGridView1.RowCount; i++){
                 dataGridView1.Rows[i].Selected = false;
                 for (int j = 0; j < dataGridView1.ColumnCount; j++)
                     if (dataGridView1.Rows[i].Cells[j].Value != null)
-                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox2.Text))
-                        {
+                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox2.Text)){
                             dataGridView1.Rows[i].Selected = true;
                             break;
                         }
             }
         }
 
-        private void textBox2_Clear(object sender, EventArgs e)
-        {
+        private void textBox2_Clear(object sender, EventArgs e){
             textBox2.Clear();
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
+        private void button9_Click(object sender, EventArgs e){
             DatabaseUpdate();
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
             SqlCommand command_select = new SqlCommand("Select * From Service where Ready_date>@Ready_date", connection);
-            command_select.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(textBox2.Text));
+            command_select.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(dateTimePicker1.Text));
             dataAdapter.SelectCommand = command_select;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Microsoft.Office.Interop.Excel.Application xlApp;
-            Microsoft.Office.Interop.Excel.Workbook xlWorkBook;
-            Microsoft.Office.Interop.Excel.Worksheet xlWorkSheet;
-            object misValue = System.Reflection.Missing.Value;
+        private void button2_Click(object sender, EventArgs e){
+            Ochko();
 
-            xlApp = new Microsoft.Office.Interop.Excel.Application();
-            xlWorkBook = xlApp.Workbooks.Open(@"Q:\\otchet", 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-            xlWorkSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            //Создаем рабочую книгу:
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            //Нам доступно редактирование некоторых параметров, в качестве примера изменим ширину столбцов:
+            ExcelApp.Columns.ColumnWidth = 15;
+            //Задать значение ячейки можно так:
 
+            ExcelApp.Cells[1, 5] = "Итоговый отчет";
+            ExcelApp.Cells[2, 1] = "ID";
+            ExcelApp.Cells[2, 2] = "Гос. номер";
+            ExcelApp.Cells[2, 3] = "Дата готовности";
+            ExcelApp.Cells[2, 4] = "Наценка";
+            ExcelApp.Cells[2, 5] = "Итоговая цена";
+            ExcelApp.Cells[2, 6] = "Наименование";
+            ExcelApp.Cells[2, 7] = "Цена";
+            ExcelApp.Cells[2, 8] = "Наименование";
+            ExcelApp.Cells[2, 9] = "Цена";
 
-            for (int i = 0; i < dataGridView1.Rows.Count; i++)
-            {
-                for (int j = 0; j < dataGridView1.ColumnCount; j++)
-                {
-                    xlApp.Cells[i + 3, j + 1] = dataGridView1.Rows[i].Cells[j].Value;
-                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
-                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
-                    (xlWorkSheet.Cells[i + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
-                    (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, j + 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Скопинцев Олег Данилович ";
+            ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++){
+                for (int j = 0; j < dataGridView1.RowCount - 1; j++){
+                    ExcelApp.Cells[j + 3, i + 1] = (dataGridView1[i, j].Value).ToString();
                 }
             }
-            xlApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Скопинцев Олег Данилович ";
+            ExcelApp.Visible = true;
 
 
-            xlApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
+            DatabaseUpdate();
+            }
 
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).Font.Size = 14;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 3] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 3, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
-
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Bold = true;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).Font.Size = 13;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
-            (xlWorkSheet.Cells[dataGridView1.Rows.Count + 4, 1] as Microsoft.Office.Interop.Excel.Range).EntireColumn.AutoFit();
-
-
-            xlApp.Visible = true;
-            xlApp.UserControl = true;
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
+        private void button10_Click(object sender, EventArgs e){
             DatabaseUpdate();
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
             SqlCommand command_select = new SqlCommand("Select * From Service where Total_cost>@Total_cost", connection);
-            command_select.Parameters.AddWithValue("@Total_cost", Convert.ToInt32(textBox5.Text));
+            command_select.Parameters.AddWithValue("@Total_cost", Convert.ToInt32(textBox2.Text));
             dataAdapter.SelectCommand = command_select;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e){
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e){
         }
     }
 }

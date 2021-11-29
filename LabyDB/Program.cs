@@ -14,6 +14,12 @@ namespace LabyDB {
         public static Form6 form6 = new Form6();
         public static login form7 = new login();
         public static Form8 form8 = new Form8();
+        public static Form9 form9 = new Form9();
+        public static Form10 form10 = new Form10();
+        public static Form11 form11 = new Form11();
+        public static Form12 form12 = new Form12();
+        public static Form13 form13 = new Form13();
+        public static Form14 form14 = new Form14();
 
         [STAThread]
         static void Main() {

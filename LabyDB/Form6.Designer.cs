@@ -37,37 +37,37 @@ namespace LabyDB
             this.button7 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.carsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
             this.button6 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.servicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.sparepartsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.sampleDatabaseDataSet1 = new LabyDB.SampleDatabaseDataSet1();
-            this.carsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.carsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.CarsTableAdapter();
-            this.servicesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.servicesTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.ServicesTableAdapter();
-            this.sparepartsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.spare_partsTableAdapter = new LabyDB.SampleDatabaseDataSet1TableAdapters.Spare_partsTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.servicesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparepartsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button8
@@ -138,14 +138,6 @@ namespace LabyDB
             this.textBox1.Size = new System.Drawing.Size(309, 20);
             this.textBox1.TabIndex = 49;
             // 
-            // textBox5
-            // 
-            this.textBox5.BackColor = System.Drawing.SystemColors.Menu;
-            this.textBox5.Location = new System.Drawing.Point(116, 389);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(309, 20);
-            this.textBox5.TabIndex = 53;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -203,6 +195,16 @@ namespace LabyDB
             this.comboBox1.TabIndex = 62;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // carsBindingSource
+            // 
+            this.carsBindingSource.DataMember = "Cars";
+            this.carsBindingSource.DataSource = this.sampleDatabaseDataSet1;
+            // 
+            // sampleDatabaseDataSet1
+            // 
+            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
+            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // button6
             // 
             this.button6.BackColor = System.Drawing.SystemColors.Menu;
@@ -256,6 +258,11 @@ namespace LabyDB
             this.comboBox2.Size = new System.Drawing.Size(309, 21);
             this.comboBox2.TabIndex = 67;
             // 
+            // servicesBindingSource
+            // 
+            this.servicesBindingSource.DataMember = "Services";
+            this.servicesBindingSource.DataSource = this.sampleDatabaseDataSet1;
+            // 
             // comboBox3
             // 
             this.comboBox3.BackColor = System.Drawing.SystemColors.Menu;
@@ -266,6 +273,11 @@ namespace LabyDB
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(309, 21);
             this.comboBox3.TabIndex = 68;
+            // 
+            // sparepartsBindingSource
+            // 
+            this.sparepartsBindingSource.DataMember = "Spare_parts";
+            this.sparepartsBindingSource.DataSource = this.sampleDatabaseDataSet1;
             // 
             // button1
             // 
@@ -314,7 +326,7 @@ namespace LabyDB
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(854, 20);
             this.textBox2.TabIndex = 73;
-            this.textBox2.Text = "Поиск и фильтрация:";
+            this.textBox2.Text = "Поиск и фильтрация цены:";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.Click += new System.EventHandler(this.textBox2_Clear);
             // 
@@ -342,37 +354,26 @@ namespace LabyDB
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // sampleDatabaseDataSet1
-            // 
-            this.sampleDatabaseDataSet1.DataSetName = "SampleDatabaseDataSet1";
-            this.sampleDatabaseDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // carsBindingSource
-            // 
-            this.carsBindingSource.DataMember = "Cars";
-            this.carsBindingSource.DataSource = this.sampleDatabaseDataSet1;
-            // 
             // carsTableAdapter
             // 
             this.carsTableAdapter.ClearBeforeFill = true;
-            // 
-            // servicesBindingSource
-            // 
-            this.servicesBindingSource.DataMember = "Services";
-            this.servicesBindingSource.DataSource = this.sampleDatabaseDataSet1;
             // 
             // servicesTableAdapter
             // 
             this.servicesTableAdapter.ClearBeforeFill = true;
             // 
-            // sparepartsBindingSource
-            // 
-            this.sparepartsBindingSource.DataMember = "Spare_parts";
-            this.sparepartsBindingSource.DataSource = this.sampleDatabaseDataSet1;
-            // 
             // spare_partsTableAdapter
             // 
             this.spare_partsTableAdapter.ClearBeforeFill = true;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.SystemColors.WindowFrame;
+            this.dateTimePicker1.Location = new System.Drawing.Point(116, 390);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(309, 20);
+            this.dateTimePicker1.TabIndex = 76;
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // Form6
             // 
@@ -380,6 +381,7 @@ namespace LabyDB
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox2);
@@ -397,7 +399,6 @@ namespace LabyDB
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
@@ -414,11 +415,11 @@ namespace LabyDB
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Сервис";
             this.Load += new System.EventHandler(this.Form6_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.carsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.servicesBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparepartsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,7 +432,6 @@ namespace LabyDB
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -457,5 +457,6 @@ namespace LabyDB
         private SampleDatabaseDataSet1TableAdapters.ServicesTableAdapter servicesTableAdapter;
         private System.Windows.Forms.BindingSource sparepartsBindingSource;
         private SampleDatabaseDataSet1TableAdapters.Spare_partsTableAdapter spare_partsTableAdapter;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

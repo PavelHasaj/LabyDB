@@ -41,10 +41,20 @@ namespace LabyDB
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(table);
 
-            if (table.Rows.Count > 0)
-            {
-                Program.form1.Show();
-                this.Hide();
+            string Role = table.Rows[0][3].ToString();
+            if (table.Rows.Count > 0){
+
+
+                if (Role.ToString() == "Administrator"){
+                    Program.form1.Show();
+                    this.Hide();
+                }
+
+                else if (Role.ToString() == "User"){
+                    Program.form9.Show();
+                    this.Hide();
+                }
+
             }
             else
             {
@@ -57,6 +67,7 @@ namespace LabyDB
             ToolTip t = new ToolTip();
             t.SetToolTip(textBox1, "Логин — позволяет пользователям войти в систему.");
             t.SetToolTip(textBox2, "Пароль — условное слово или произвольный набор знаков, состоящий из букв, цифр и других символов, и предназначенный для подтверждения личности или полномочий.");
+            textBox2.UseSystemPasswordChar = true;
         }
     }
 }
