@@ -251,12 +251,13 @@ namespace LabyDB
             // 
             this.comboBox2.BackColor = System.Drawing.SystemColors.Menu;
             this.comboBox2.DataSource = this.servicesBindingSource;
-            this.comboBox2.DisplayMember = "Id_services";
+            this.comboBox2.DisplayMember = "Name";
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(116, 337);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(309, 21);
             this.comboBox2.TabIndex = 67;
+            this.comboBox2.ValueMember = "Id_services";
             // 
             // servicesBindingSource
             // 
@@ -267,12 +268,13 @@ namespace LabyDB
             // 
             this.comboBox3.BackColor = System.Drawing.SystemColors.Menu;
             this.comboBox3.DataSource = this.sparepartsBindingSource;
-            this.comboBox3.DisplayMember = "Id_spare_parts";
+            this.comboBox3.DisplayMember = "Name";
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(116, 363);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(309, 21);
             this.comboBox3.TabIndex = 68;
+            this.comboBox3.ValueMember = "Id_spare_parts";
             // 
             // sparepartsBindingSource
             // 

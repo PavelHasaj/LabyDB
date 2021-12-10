@@ -111,6 +111,21 @@ namespace LabyDB{
                     ExcelApp.Cells[j + 3, i + 1] = (dataGridView1[i, j].Value).ToString();
                 }
             }
+
+            ExcelApp.Cells[1, 2].Font.Bold = true;
+            ExcelApp.Cells[1, 2].Font.Size = 14;
+            ExcelApp.Cells[9, 1].Font.Bold = true;
+            ExcelApp.Cells[9, 1].Font.Size = 14;
+            ExcelApp.Cells[10, 1].Font.Bold = true;
+            ExcelApp.Cells[10, 1].Font.Size = 14;
+
+            for (int i = 1; i <= 9; i++)
+            {
+                ExcelApp.Cells[2, i].Font.Bold = true;
+                ExcelApp.Cells[2, i].Font.Size = 14;
+            }
+
+            ExcelApp.Columns.AutoFit();
             ExcelApp.Visible = true;
 
 

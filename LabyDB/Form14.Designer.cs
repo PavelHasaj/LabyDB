@@ -39,6 +39,7 @@ namespace LabyDB
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -154,12 +155,25 @@ namespace LabyDB
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // button11
+            // 
+            this.button11.BackColor = System.Drawing.SystemColors.Menu;
+            this.button11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button11.Location = new System.Drawing.Point(446, 284);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(114, 23);
+            this.button11.TabIndex = 83;
+            this.button11.Text = "По популярности";
+            this.button11.UseVisualStyleBackColor = false;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form14
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(854, 450);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -169,6 +183,7 @@ namespace LabyDB
             this.Controls.Add(this.button8);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.dataGridView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form14";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -191,5 +206,6 @@ namespace LabyDB
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
     }
 }

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using Microsoft.Office.Interop;
+using System.IO;
 
 namespace LabyDB
 {
     public partial class Form6 : Form {
         //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
+        SqlConnection connection2 = new SqlConnection(Properties.Settings.Default.SampleDatabaseConnectionString);
+
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
         SampleDatabaseDataSet dataSet = new SampleDatabaseDataSet();
 
@@ -22,7 +24,7 @@ namespace LabyDB
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
 
-            DeleteEmptyColumns(dataGridView1);
+            Program.DeleteEmptyColumns(dataGridView1);
             dataGridView1.Columns[0].HeaderText = "Id";
             dataGridView1.Columns[1].HeaderText = "Гос. номер";
             dataGridView1.Columns[2].HeaderText = "Id услуги";
@@ -40,8 +42,8 @@ namespace LabyDB
             SqlCommand comand = new SqlCommand("Insert Into Service Values (@Id, @State_number, @Id_services, @Id_spare_parts, @Ready_date, @Nacenka, @Total_cost)", connection);
             comand.Parameters.AddWithValue("@Id", Convert.ToInt32(textBox1.Text));
             comand.Parameters.AddWithValue("@State_number", comboBox1.Text);
-            comand.Parameters.AddWithValue("@Id_services", Convert.ToInt32(comboBox2.Text));
-            comand.Parameters.AddWithValue("@Id_spare_parts", Convert.ToInt32(comboBox3.Text));
+            comand.Parameters.AddWithValue("@Id_services", comboBox2.SelectedValue);
+            comand.Parameters.AddWithValue("@Id_spare_parts", comboBox3.SelectedValue);
             comand.Parameters.AddWithValue("@Ready_date", Convert.ToDateTime(dateTimePicker1.Text));
             comand.Parameters.AddWithValue("@Nacenka", Convert.ToInt32(textBox6.Text));
             comand.Parameters.AddWithValue("@Total_cost", Convert.ToInt32(textBox3.Text));
@@ -59,8 +61,8 @@ namespace LabyDB
             dataSet.Clear();
             connection.Open();
 
-            SqlCommand comand = new SqlCommand("UPDATE Service SET Total_cost=Total_cost+Nacenka", connection);
-            dataAdapter.SelectCommand = comand;
+            SqlCommand comand = new SqlCommand("Update Service SET Total_cost = (100 + Service.Nacenka) / 100 * (Services.Cost + Spare_parts.Cost) FROM (Service INNER JOIN Services ON Service.Id_services = Services.Id_services LEFT JOIN Spare_parts ON Service.Id_spare_parts = Spare_parts.Id_spare_parts)", connection);
+            dataAdapter.SelectCommand = comand; 
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
@@ -69,44 +71,51 @@ namespace LabyDB
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-            SqlCommand comand = new SqlCommand("Update Service SET Total_cost = Services.Cost + Spare_parts.Cost FROM (Service INNER JOIN Services ON Service.Id_services = Services.Id_services LEFT JOIN Spare_parts ON Service.Id_spare_parts = Spare_parts.Id_spare_parts)", connection);
+            SqlCommand comand = new SqlCommand("Update Service SET Total_cost = Service.Nacenka + Services.Cost + Spare_parts.Cost FROM (Service INNER JOIN Services ON Service.Id_services = Services.Id_services LEFT JOIN Spare_parts ON Service.Id_spare_parts = Spare_parts.Id_spare_parts)", connection);
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
-        public static void DeleteEmptyColumns(DataGridView dataGridView1){
-            bool IsColumnEmpty;
-            for (int i = 0; i < dataGridView1.Columns.Count; i++){
-                IsColumnEmpty = dataGridView1.Rows[0].Cells[i].Value.ToString() == "";
-                if (IsColumnEmpty){
-                    dataGridView1.Columns.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
+        
         private void Ochko(){
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
             SqlCommand comand = new SqlCommand
-            ("SELECT Service.Id, Service.State_number, Service.Ready_date, Service.Nacenka, Services.Name, Services.Cost, Spare_parts.Name, Spare_parts.Cost, Service.Total_cost " +
-            "FROM Service INNER JOIN Services ON Service.Id_services=Services.Id_services LEFT JOIN Spare_parts ON Service.Id_spare_parts=Spare_parts.Id_spare_parts", connection);
+            ("SELECT Service.Id, Service.State_number, Services.Name, Services.Cost, Spare_parts.Name, Spare_parts.Cost, Service.Ready_date, Service.Nacenka, Service.Total_cost " +
+            "FROM Service LEFT JOIN Services ON Service.Id_services=Services.Id_services LEFT JOIN Spare_parts ON Service.Id_spare_parts=Spare_parts.Id_spare_parts", connection);
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
 
-            DeleteEmptyColumns(dataGridView1);
+            Program.DeleteEmptyColumns(dataGridView1);
+
+            string Header = dataGridView1.Columns[4].HeaderText;
+            string[] data = new string[dataGridView1.RowCount-1];
+            //data[0] = dataGridView1.Columns[4].HeaderText;
+            for (int i = 0; i < dataGridView1.RowCount - 1; i++)
+                data[i] = dataGridView1.Rows[i].Cells[4].Value.ToString();
+
+            dataGridView1.Columns.RemoveAt(4);
+
+            dataGridView1.Columns.Add("Column100", Header);
+
+            int lastColumn = dataGridView1.ColumnCount - 1;
+            for (int i = 0; i < data.Length; i++)
+                dataGridView1.Rows[i].Cells[lastColumn].Value = data[i];
+
             dataGridView1.Columns[0].HeaderText = "ID";
             dataGridView1.Columns[1].HeaderText = "State_number";
             dataGridView1.Columns[2].HeaderText = "Ready_date";
             dataGridView1.Columns[3].HeaderText = "Nacenka";
-            dataGridView1.Columns[4].HeaderText = "Total_cost";
-            dataGridView1.Columns[5].HeaderText = "Name";
-            dataGridView1.Columns[6].HeaderText = "Cost";
-            dataGridView1.Columns[7].HeaderText = "Name";
-            dataGridView1.Columns[8].HeaderText = "Cost";
+            dataGridView1.Columns[4].HeaderText = "Name";
+            dataGridView1.Columns[5].HeaderText = "Cost";
+            dataGridView1.Columns[6].HeaderText = "Name";
+            dataGridView1.Columns[7].HeaderText = "Cost";
+            dataGridView1.Columns[8].HeaderText = "Total_cost";
+
         }
         //Изменение записи
         void DataChange(){
@@ -147,6 +156,7 @@ namespace LabyDB
         public Form6(){
             InitializeComponent();
         }
+        string Path = Directory.GetCurrentDirectory() + @"nacenka.txt";
 
         private void Form6_Load(object sender, EventArgs e){
             // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Spare_parts". При необходимости она может быть перемещена или удалена.
@@ -164,6 +174,15 @@ namespace LabyDB
             t.SetToolTip(button1, "Нажмите чтобы добавить новую запись.");
             t.SetToolTip(button3, "Нажмите чтобы изменить существующую запись.");
             t.SetToolTip(button7, "Нажмите чтобы удалить существующую запись.");
+
+            if (File.Exists(Path))
+            {
+                textBox6.Text = File.ReadAllText(Path);
+            }
+            else
+            {
+                MessageBox.Show("Файл наценка не существует");
+            }
         }
         //Кнопка обновить
         private void button8_Click(object sender, EventArgs e){
@@ -172,7 +191,6 @@ namespace LabyDB
         //Кнопка добавить
         private void button1_Click(object sender, EventArgs e){
             DataAdd();
-            DataDB2();
             DataDB();
             DatabaseUpdate();
         }
@@ -248,11 +266,11 @@ namespace LabyDB
             ExcelApp.Cells[2, 2] = "Гос. номер";
             ExcelApp.Cells[2, 3] = "Дата готовности";
             ExcelApp.Cells[2, 4] = "Наценка";
-            ExcelApp.Cells[2, 5] = "Итоговая цена";
-            ExcelApp.Cells[2, 6] = "Наименование";
-            ExcelApp.Cells[2, 7] = "Цена";
-            ExcelApp.Cells[2, 8] = "Наименование";
-            ExcelApp.Cells[2, 9] = "Цена";
+            ExcelApp.Cells[2, 5] = "Наименование";
+            ExcelApp.Cells[2, 6] = "Цена";
+            ExcelApp.Cells[2, 7] = "Наименование";
+            ExcelApp.Cells[2, 8] = "Цена";
+            ExcelApp.Cells[2, 9] = "Итоговая цена";
 
             ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Скопинцев Олег Данилович ";
             ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
@@ -262,11 +280,26 @@ namespace LabyDB
                     ExcelApp.Cells[j + 3, i + 1] = (dataGridView1[i, j].Value).ToString();
                 }
             }
+
+
+            ExcelApp.Cells[1, 5].Font.Bold = true;
+            ExcelApp.Cells[1, 5].Font.Size = 14;
+            ExcelApp.Cells[12, 1].Font.Bold = true;
+            ExcelApp.Cells[12, 1].Font.Size = 14;
+            ExcelApp.Cells[13, 1].Font.Bold = true;
+            ExcelApp.Cells[13, 1].Font.Size = 14;
+
+            for (int i = 1; i<=9; i++)
+            {
+                ExcelApp.Cells[2, i].Font.Bold = true;
+                ExcelApp.Cells[2, i].Font.Size = 14;
+            }
+
+            ExcelApp.Columns.AutoFit();
             ExcelApp.Visible = true;
 
-
             DatabaseUpdate();
-            }
+        }
 
         private void button10_Click(object sender, EventArgs e){
             DatabaseUpdate();

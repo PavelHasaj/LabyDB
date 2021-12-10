@@ -59,7 +59,8 @@ namespace LabyDB {
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Program.form8.Show();
+            Form8 form8 = new Form8();
+            form8.Show();
             this.Hide();
         }
 

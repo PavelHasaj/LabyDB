@@ -24,10 +24,12 @@ namespace LabyDB{
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
-            SqlCommand comand = new SqlCommand("Insert Into users Values (@Id, @login, @pass)", connection);
+            SqlCommand comand = new SqlCommand("Insert Into users Values (@Id, @login, @pass, @role)", connection);
             comand.Parameters.AddWithValue("@Id", Convert.ToInt64(textBox1.Text));
             comand.Parameters.AddWithValue("@login", textBox3.Text);
             comand.Parameters.AddWithValue("@pass", textBox4.Text);
+            comand.Parameters.AddWithValue("@role", comboBox1.Text);
+
             dataAdapter.SelectCommand = comand;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
@@ -36,12 +38,13 @@ namespace LabyDB{
         }
         //Изменение записи
         void DataChange(){
-            SqlCommand command = new SqlCommand("Update users set login=@login, pass=@pass Where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
+            SqlCommand command = new SqlCommand("Update users set login=@login, pass=@pass, role=@role Where Id = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
             dataGridView1.DataSource = null;
             dataSet.Clear();
             connection.Open();
             command.Parameters.AddWithValue("@login", textBox3.Text);
             command.Parameters.AddWithValue("@pass", textBox4.Text);
+            command.Parameters.AddWithValue("@role", comboBox1.Text);
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
@@ -71,6 +74,9 @@ namespace LabyDB{
         }
 
         private void Form8_Load(object sender, EventArgs e){
+            comboBox1.Items.Add("Administrator");
+            comboBox1.Items.Add("User");
+
             DatabaseUpdate();
         }
 
@@ -100,6 +106,11 @@ namespace LabyDB{
 
         private void button8_Click(object sender, EventArgs e){
             DatabaseUpdate();
+        }
+
+        private void textBox1_Clear(object sender, EventArgs e)
+        {
+            textBox2.Clear();
         }
     }
 }

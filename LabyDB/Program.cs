@@ -21,6 +21,22 @@ namespace LabyDB {
         public static Form13 form13 = new Form13();
         public static Form14 form14 = new Form14();
 
+        //Метод удаления пустых столбцов
+        public static void DeleteEmptyColumns(DataGridView dataGridView1)
+        {
+            bool IsColumnEmpty;
+            for (int i = 0; i < dataGridView1.Columns.Count; i++)
+            {
+                IsColumnEmpty = dataGridView1.Rows[0].Cells[i].Value == null || dataGridView1.Rows[0].Cells[i].Value.ToString() == "";
+                if (IsColumnEmpty)
+                {
+                    dataGridView1.Columns.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+
         [STAThread]
         static void Main() {
             Application.EnableVisualStyles();

@@ -24,6 +24,8 @@ namespace LabyDB
             dataGridView1.Columns[0].HeaderText = "Id запчасти";
             dataGridView1.Columns[1].HeaderText = "Наименование";
             dataGridView1.Columns[2].HeaderText = "Цена";
+
+            Program.DeleteEmptyColumns(dataGridView1);
         }
         //Добавление записи
         void DataAdd(){
@@ -470,6 +472,25 @@ namespace LabyDB
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {            
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand comand = new SqlCommand("SELECT Spare_parts.Id_spare_parts, Spare_parts.Name, COUNT (Service.Id) AS count FROM Service, Spare_parts WHERE Spare_parts.Id_spare_parts = Service.Id_spare_parts GROUP BY Spare_parts.Id_spare_parts, Spare_parts.Name ORDER BY count DESC", connection);
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+
+            dataGridView1.Columns[0].HeaderText = "Id запчасти";
+            dataGridView1.Columns[1].HeaderText = "Наименование";
+            dataGridView1.Columns[3].HeaderText = "Кол-во заказов";
+
+            Program.DeleteEmptyColumns(dataGridView1);
         }
     }
 }

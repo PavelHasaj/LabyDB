@@ -9,9 +9,18 @@ namespace LabyDB
         //Строка подключения к БД
         SqlConnection connection = new SqlConnection(Program.GetConnectionString());
 
+        private void Login_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) button2.PerformClick();
+        }
+
         public login()
 {
             InitializeComponent();
+
+            this.KeyPreview = true;
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Login_KeyUp);
+            this.button2.Click += new System.EventHandler(this.button2_Click); 
         }
 
         private void button1_Click(object sender, EventArgs e){
@@ -41,20 +50,24 @@ namespace LabyDB
             dataAdapter.SelectCommand = command;
             dataAdapter.Fill(table);
 
-            string Role = table.Rows[0][3].ToString();
-            if (table.Rows.Count > 0){
+            if (table.Rows.Count > 0)
+            {
+                string Role = table.Rows[0][3].ToString();
+                if (table.Rows.Count > 0)
+                {
 
+                    if (Role.ToString() == "Administrator")
+                    {
+                        Program.form1.Show();
+                        this.Hide();
+                    }
 
-                if (Role.ToString() == "Administrator"){
-                    Program.form1.Show();
-                    this.Hide();
+                    else if (Role.ToString() == "User")
+                    {
+                        Program.form9.Show();
+                        this.Hide();
+                    }
                 }
-
-                else if (Role.ToString() == "User"){
-                    Program.form9.Show();
-                    this.Hide();
-                }
-
             }
             else
             {
