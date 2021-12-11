@@ -27,19 +27,6 @@ namespace LabyDB {
             dataGridView1.Columns[2].HeaderText = "Номер телефона";
             dataGridView1.Columns[3].HeaderText = "Номер лицевого счета";
         }
-        public static void DeleteEmptyColumns(DataGridView dataGridView1)
-        {
-            bool IsColumnEmpty;
-            for (int i = 0; i < dataGridView1.Columns.Count; i++)
-            {
-                IsColumnEmpty = dataGridView1.Rows[0].Cells[i].Value.ToString() == "";
-                if (IsColumnEmpty)
-                {
-                    dataGridView1.Columns.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
         private void Ochko()
         {
             dataGridView1.DataSource = null;
@@ -52,7 +39,7 @@ namespace LabyDB {
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
 
-            DeleteEmptyColumns(dataGridView1);
+            Program.DeleteEmptyColumns(dataGridView1);
             dataGridView1.Columns[0].HeaderText = "Id_owner";
             dataGridView1.Columns[1].HeaderText = "FIO";
             dataGridView1.Columns[2].HeaderText = "Phone_number";
