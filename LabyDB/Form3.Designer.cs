@@ -72,6 +72,7 @@ namespace LabyDB
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.button18 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.abonentsBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sampleDatabaseDataSet1)).BeginInit();
@@ -474,11 +475,27 @@ namespace LabyDB
             // comboBox3
             // 
             this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "0-50",
+            "51-150",
+            "151-300",
+            "301-5000"});
             this.comboBox3.Location = new System.Drawing.Point(432, 84);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(150, 21);
             this.comboBox3.TabIndex = 42;
             this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // button18
+            // 
+            this.button18.BackColor = System.Drawing.SystemColors.Window;
+            this.button18.Location = new System.Drawing.Point(588, 82);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(150, 23);
+            this.button18.TabIndex = 41;
+            this.button18.Text = "Фильтр комбобокса";
+            this.button18.UseVisualStyleBackColor = false;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // Form3
             // 
@@ -487,6 +504,7 @@ namespace LabyDB
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 536);
             this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.button18);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.label11);
@@ -583,5 +601,6 @@ namespace LabyDB
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button button18;
     }
 }

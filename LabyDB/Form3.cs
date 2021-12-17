@@ -67,14 +67,7 @@ namespace LabyDB
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Abonents". При необходимости она может быть перемещена или удалена.
-            this.abonentsTableAdapter.Fill(this.sampleDatabaseDataSet1.Abonents);
             DatabaseUpdate();
-
-            comboBox3.Items.Add("До 50 киловатт");
-            comboBox3.Items.Add("От 51 до 150 киловатт");
-            comboBox3.Items.Add("От 151 до 300 киловатт");
-            comboBox3.Items.Add("От 301 до 5000 киловатт");
         }
 
     // Изменение
@@ -337,21 +330,36 @@ namespace LabyDB
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox3.SelectedIndex)
-            {
-                case 0:
-                    (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts <=50";
-                    break;
-                case 1:
-                    (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=51 AND NumberOfKilowatts <=150 ";
-                    break;
-                case 2:
-                    (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=151 AND NumberOfKilowatts <=300 ";
-                    break;
-                case 3:
-                    (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=301 AND NumberOfKilowatts <=5000 ";
-                    break;
-            }
+            //switch (comboBox3.SelectedIndex)
+            //{
+            //    case 0:
+            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts <=50";
+            //        break;
+            //    case 1:
+            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=51 AND NumberOfKilowatts <=150 ";
+            //        break;
+            //    case 2:
+            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=151 AND NumberOfKilowatts <=300 ";
+            //        break;
+            //    case 3:
+            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=301 AND NumberOfKilowatts <=5000 ";
+            //        break;
+            //}
+        }
+        private void button18_Click(object sender, EventArgs e) {
+            dataGridView1.DataSource = null;
+            connection.Open();
+            SqlCommand comand = new SqlCommand("Select * from Payments Where NumberOfKilowatts >= @min AND NumberOfKilowatts <= @max", connection);
+            DataSet ds = new DataSet();
+            string[] range = new string[2];
+            range = comboBox3.SelectedItem.ToString().Split('-');
+            comand.Parameters.AddWithValue("@min", range[0]);
+            comand.Parameters.AddWithValue("@max", range[1]);
+
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
+            connection.Close();
         }
     }
 }
