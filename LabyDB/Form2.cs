@@ -95,12 +95,6 @@ namespace LabyDB {
             this.Hide();
         }
 
-        private void button7_Click(object sender, EventArgs e)
-        {
-            Program.form1.Show();
-            this.Hide();
-        }
-
         private void button8_Click(object sender, EventArgs e)
         {
             DatabaseUpdate();
@@ -110,6 +104,125 @@ namespace LabyDB {
         {
             Program.form1.Show();
             this.Hide();
+        }
+
+        private void textBox_Click(object sender, EventArgs e)
+        {
+            textBox4.Clear();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                dataGridView1.Rows[i].Selected = false;
+                for (int j = 0; j < dataGridView1.ColumnCount; j++)
+                    if (dataGridView1.Rows[i].Cells[j].Value != null)
+                        if (dataGridView1.Rows[i].Cells[j].Value.ToString().Contains(textBox4.Text))
+                        {
+                            dataGridView1.Rows[i].Selected = true;
+                            break;
+                        }
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("Select * From Abonents where AbonentID>@AbonentID", connection);
+            command_select.Parameters.AddWithValue("@AbonentID", Convert.ToInt32(textBox4.Text));
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
+        private void Ochko()
+        {
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand comand = new SqlCommand
+            ("SELECT * From Abonents", connection);
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+
+            Program.DeleteEmptyColumns(dataGridView1);
+            dataGridView1.Columns[0].HeaderText = "ID абонента";
+            dataGridView1.Columns[1].HeaderText = "ФИО";
+            dataGridView1.Columns[2].HeaderText = "Адресс";
+        }
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Ochko();
+
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            //Создаем рабочую книгу:
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            //Нам доступно редактирование некоторых параметров, в качестве примера изменим ширину столбцов:
+            ExcelApp.Columns.ColumnWidth = 15;
+            //Задать значение ячейки можно так:
+
+            ExcelApp.Cells[1, 2] = "Итоговый отчет по абонентам";
+            ExcelApp.Cells[2, 1] = "ID абонента";
+            ExcelApp.Cells[2, 2] = "ФИО";
+            ExcelApp.Cells[2, 3] = "Адресс";
+
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Павел Хасай";
+            ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.RowCount - 1; j++)
+                {
+                    ExcelApp.Cells[j + 3, i + 1] = (dataGridView1[i, j].Value).ToString();
+                }
+            }
+
+
+            ExcelApp.Cells[1, 2].Font.Bold = true;
+            ExcelApp.Cells[1, 2].Font.Size = 13;
+
+            for (int i = 1; i <= 9; i++)
+            {
+                ExcelApp.Cells[2, i].Font.Bold = true;
+                ExcelApp.Cells[2, i].Font.Size = 12;
+            }
+
+            ExcelApp.Columns.AutoFit();
+            ExcelApp.Visible = true;
+
+            DatabaseUpdate();
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+
+            SqlCommand comand = new SqlCommand("Select * FROM Abonents ORDER BY FullName", connection);
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+
+            SqlCommand comand = new SqlCommand("Select * FROM Abonents ORDER BY AbonentID", connection);
+            dataAdapter.SelectCommand = comand;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
         }
     }
 }
