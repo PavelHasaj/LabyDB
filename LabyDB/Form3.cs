@@ -330,21 +330,7 @@ namespace LabyDB
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //switch (comboBox3.SelectedIndex)
-            //{
-            //    case 0:
-            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts <=50";
-            //        break;
-            //    case 1:
-            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=51 AND NumberOfKilowatts <=150 ";
-            //        break;
-            //    case 2:
-            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=151 AND NumberOfKilowatts <=300 ";
-            //        break;
-            //    case 3:
-            //        (dataGridView1.DataSource as DataTable).DefaultView.RowFilter = $"NumberOfKilowatts >=301 AND NumberOfKilowatts <=5000 ";
-            //        break;
-            //}
+            
         }
         private void button18_Click(object sender, EventArgs e) {
             dataGridView1.DataSource = null;
