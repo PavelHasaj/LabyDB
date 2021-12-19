@@ -7,21 +7,19 @@ namespace LabyDB {
             InitializeComponent();
         }
 
-        private void Form2_open_button(object sender, EventArgs e) {
-            Program.form2.Show();
+        private void abonentsForm_open_button(object sender, EventArgs e) {
+            Program.abonentsForm.Show();
             this.Hide();
         }
 
-        private void Form3_open_button(object sender, EventArgs e)
+        private void paymentsForm_open_button(object sender, EventArgs e)
         {
-            Program.form3.Show();
+            Program.paymentsForm.Show();
             this.Hide();
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Program.form4.Show();
-            this.Hide();
+        private void FormExitButton_Click(object sender, EventArgs e) {
+            Application.Exit();
         }
     }
 }
