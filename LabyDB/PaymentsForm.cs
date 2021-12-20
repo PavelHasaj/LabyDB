@@ -163,26 +163,7 @@ namespace LabyDB
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
         }
-        private void Ochko()
-        {
-            dataGridView1.DataSource = null;
-            dataSet.Clear();
-            connection.Open();
-            SqlCommand comand = new SqlCommand
-            ("SELECT Abonents.AbonentID, Payments.Tariff, Payments.NumberOfKilowatts,  Abonents.FullName, SUM(Payments.Tariff * Payments.NumberOfKilowatts) AS sum From Abonents INNER JOIN Payments ON Abonents.AbonentID = Payments.AbonentID GROUP BY Abonents.AbonentID, Abonents.FullName, Payments.NumberOfKilowatts, Payments.Tariff", connection);
-            dataAdapter.SelectCommand = comand;
 
-            dataAdapter.Fill(dataSet);
-            dataGridView1.DataSource = dataSet.Tables[0];
-            connection.Close();
-
-            Program.DeleteEmptyColumns(dataGridView1);
-            int Sum = 0;
-            for (int i = 0; i < dataGridView1.RowCount; i++)
-            {
-                Sum += Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
-            }
-        }
         private void Ochko2()
         {
             DatabaseUpdate();
@@ -212,7 +193,23 @@ namespace LabyDB
         private void button14_Click(object sender, EventArgs e)
         {
 
-            Ochko();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand comand = new SqlCommand
+            ("SELECT Abonents.AbonentID, Payments.Tariff, Payments.NumberOfKilowatts,  Abonents.FullName, SUM(Payments.Tariff * Payments.NumberOfKilowatts) AS sum From Abonents INNER JOIN Payments ON Abonents.AbonentID = Payments.AbonentID GROUP BY Abonents.AbonentID, Abonents.FullName, Payments.NumberOfKilowatts, Payments.Tariff", connection);
+            dataAdapter.SelectCommand = comand;
+
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+
+            Program.DeleteEmptyColumns(dataGridView1);
+            int Sum = 0;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                Sum += Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
+            }
 
             Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
             //Создаем рабочую книгу:
@@ -228,10 +225,15 @@ namespace LabyDB
             ExcelApp.Cells[2, 4] = "ФИО";
             ExcelApp.Cells[2, 5] = "Сумма к оплате";
 
-            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 3, 6]].Merge();
-            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 4, 6]].Merge();
-            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо – “Павел Хасай";
-            ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 3, 4]].Merge();
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Итоговая стоимость:";
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1].Font.Bold = true;
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 5] = Sum;
+
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 4, 5]].Merge();
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 5, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 5, 5]].Merge();
+            ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Отвественное лицо – “Павел Хасай";
+            ExcelApp.Cells[dataGridView1.Rows.Count + 5, 1] = "Дата выдачи отчета - " + DateTime.Now;
 
             for (int i = 0; i < dataGridView1.ColumnCount; i++)
             {
