@@ -8,13 +8,15 @@ namespace LabyDB {
         }
 
         private void abonentsForm_open_button(object sender, EventArgs e) {
-            Program.abonentsForm.Show();
+            AbonentsForm form = new AbonentsForm();
+            form.Show();
             this.Hide();
         }
 
         private void paymentsForm_open_button(object sender, EventArgs e)
         {
-            Program.paymentsForm.Show();
+            PaymentsForm form = new PaymentsForm();
+            form.Show();
             this.Hide();
         }
 

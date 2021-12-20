@@ -14,8 +14,9 @@ namespace LabyDB
 
         private void ToPreviousFormButton_Click(object sender, EventArgs e)
         {
-            Program.abonentsForm.Show();
-            this.Hide();
+            AbonentsForm form = new AbonentsForm();
+            form.Show();
+            this.Close();
         }
 
         private void ToMainFormButton_Click(object sender, EventArgs e)
@@ -40,69 +41,10 @@ namespace LabyDB
             connection.Close();
         }
 
-        // Добавление
-        private void button1_Click(object sender, EventArgs e)
-        {
-            dataGridView1.DataSource = null;
-            dataSet.Clear();
-            connection.Open();
-
-            SqlCommand comand = new SqlCommand("Insert Into Payments Values (@ID, @AbonentID, @MonthOfPayment, @Tariff, @NumberOfKilowatts)", connection);
-
-            comand.Parameters.AddWithValue("@ID", Convert.ToInt32(textBox9.Text));
-            comand.Parameters.AddWithValue("@AbonentID", comboBox1.SelectedValue);
-            comand.Parameters.AddWithValue("@MonthOfPayment", Convert.ToDateTime(dateTimePicker1.Text));
-            comand.Parameters.AddWithValue("@Tariff", Convert.ToInt32(textBox3.Text));
-            comand.Parameters.AddWithValue("@NumberOfKilowatts", Convert.ToInt32(textBox4.Text));
-
-            dataAdapter.SelectCommand = comand;
-            dataAdapter.Fill(dataSet);
-            dataGridView1.DataSource = dataSet.Tables[0];
-            connection.Close();
-
-            DatabaseUpdate();//вызов метода обновления dataGridView
-        }
-
         private void Form3_Load(object sender, EventArgs e)
         {
-            DatabaseUpdate();
-        }
-
-        // Изменение
-        private void button3_Click(object sender, EventArgs e)
-        {
-            SqlCommand command = new SqlCommand("Update Payments set AbonentID=@AbonentID, MonthOfPayment=@MonthOfPayment, Tariff=@Tariff, NumberOfKilowatts=@NumberOfKilowatts Where ID = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
-            dataGridView1.DataSource = null;
-            dataSet.Clear();
-            connection.Open();
-
-            command.Parameters.AddWithValue("@AbonentID", comboBox1.SelectedValue);
-            command.Parameters.AddWithValue("@MonthOfPayment", Convert.ToDateTime(dateTimePicker1.Text));
-            command.Parameters.AddWithValue("@Tariff", Convert.ToDouble(textBox3.Text));
-            command.Parameters.AddWithValue("@NumberOfKilowatts", Convert.ToInt32(textBox4.Text));
-
-            dataAdapter.SelectCommand = command;
-            dataAdapter.Fill(dataSet);
-            dataGridView1.DataSource = dataSet.Tables[0];
-            connection.Close();
-
-            DatabaseUpdate();
-        }
-
-        // Удаление
-        private void button7_Click(object sender, EventArgs e)
-        {
-            SqlCommand command = new SqlCommand("Delete From Payments where ID = " + dataGridView1[0, dataGridView1.CurrentRow.Index].Value, connection);
-
-            dataGridView1.DataSource = null;
-            dataSet.Clear();
-            connection.Open();
-
-            dataAdapter.SelectCommand = command;
-            dataAdapter.Fill(dataSet);
-            dataGridView1.DataSource = dataSet.Tables[0];
-            connection.Close();
-
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "sampleDatabaseDataSet1.Abonents". При необходимости она может быть перемещена или удалена.
+            this.abonentsTableAdapter.Fill(this.sampleDatabaseDataSet1.Abonents);
             DatabaseUpdate();
         }
 
@@ -115,15 +57,15 @@ namespace LabyDB
         //Считает сумму к оплате за месяц
         private void button2_Click(object sender, EventArgs e)
         {
-                dataGridView1.DataSource = null;
-                dataSet.Clear();
-                connection.Open();
+           dataGridView1.DataSource = null;
+           dataSet.Clear();
+           connection.Open();
 
-                SqlCommand comand = new SqlCommand("Select *, Tariff * NumberOfKilowatts AS Total_cost FROM Payments", connection);
-                dataAdapter.SelectCommand = comand;
-                dataAdapter.Fill(dataSet);
-                dataGridView1.DataSource = dataSet.Tables[0];
-                connection.Close();
+           SqlCommand comand = new SqlCommand("Select *, Tariff * NumberOfKilowatts AS Total_cost FROM Payments", connection);
+           dataAdapter.SelectCommand = comand;
+           dataAdapter.Fill(dataSet);
+           dataGridView1.DataSource = dataSet.Tables[0];
+           connection.Close();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -227,23 +169,49 @@ namespace LabyDB
             dataSet.Clear();
             connection.Open();
             SqlCommand comand = new SqlCommand
-            ("SELECT * From Payments", connection);
+            ("SELECT Abonents.AbonentID, Payments.Tariff, Payments.NumberOfKilowatts,  Abonents.FullName, SUM(Payments.Tariff * Payments.NumberOfKilowatts) AS sum From Abonents INNER JOIN Payments ON Abonents.AbonentID = Payments.AbonentID GROUP BY Abonents.AbonentID, Abonents.FullName, Payments.NumberOfKilowatts, Payments.Tariff", connection);
             dataAdapter.SelectCommand = comand;
+
             dataAdapter.Fill(dataSet);
             dataGridView1.DataSource = dataSet.Tables[0];
             connection.Close();
 
             Program.DeleteEmptyColumns(dataGridView1);
-
-            dataGridView1.Columns[0].HeaderText = "Номер записи";
-            dataGridView1.Columns[1].HeaderText = "Номер лицевого счета";
-            dataGridView1.Columns[2].HeaderText = "Месяц оплаты";
-            dataGridView1.Columns[3].HeaderText = "Тариф";
-            dataGridView1.Columns[4].HeaderText = "Количество киловатт";
-
+            int Sum = 0;
+            for (int i = 0; i < dataGridView1.RowCount; i++)
+            {
+                Sum += Convert.ToInt32(dataGridView1.Rows[i].Cells[4].Value);
+            }
+        }
+        private void Ochko2()
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("SELECT Tariff, COUNT(*) as count FROM Payments GROUP BY Tariff", connection);
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+            Program.DeleteEmptyColumns(dataGridView1);
+        }
+        private void Ochko3()
+        {
+            DatabaseUpdate();
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+            SqlCommand command_select = new SqlCommand("SELECT Abonents.FullName, Abonents.Adress, Payments.AbonentID, Payments.MonthOfPayment, Payments.Tariff, Payments.NumberOfKilowatts FROM Abonents INNER JOIN Payments ON Abonents.AbonentID = Payments.AbonentID", connection);
+            dataAdapter.SelectCommand = command_select;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+            Program.DeleteEmptyColumns(dataGridView1);
         }
         private void button14_Click(object sender, EventArgs e)
         {
+
             Ochko();
 
             Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
@@ -252,15 +220,17 @@ namespace LabyDB
             //Нам доступно редактирование некоторых параметров, в качестве примера изменим ширину столбцов:
             ExcelApp.Columns.ColumnWidth = 15;
             //Задать значение ячейки можно так:
+            ExcelApp.Range[ExcelApp.Cells[1, 1], ExcelApp.Cells[1, 5]].Merge();
+            ExcelApp.Cells[1, 1] = "Ведомость оплаты за электроэнергию за месяц";
+            ExcelApp.Cells[2, 1] = "Номер лицевого счета";
+            ExcelApp.Cells[2, 2] = "Тариф";
+            ExcelApp.Cells[2, 3] = "Кол-во киловатт";
+            ExcelApp.Cells[2, 4] = "ФИО";
+            ExcelApp.Cells[2, 5] = "Сумма к оплате";
 
-            ExcelApp.Cells[1, 3] = "Итоговый отчет по оплате";
-            ExcelApp.Cells[2, 1] = "Номер записи";
-            ExcelApp.Cells[2, 2] = "Номер лицевого счета";
-            ExcelApp.Cells[2, 3] = "Месяц оплаты";
-            ExcelApp.Cells[2, 4] = "Тариф";
-            ExcelApp.Cells[2, 5] = "Количество киловатт";
-
-            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо - Отвественное лицо – “Павел Хасай";
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 3, 6]].Merge();
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 4, 6]].Merge();
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо – “Павел Хасай";
             ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
 
             for (int i = 0; i < dataGridView1.ColumnCount; i++)
@@ -272,8 +242,8 @@ namespace LabyDB
             }
 
 
-            ExcelApp.Cells[1, 3].Font.Bold = true;
-            ExcelApp.Cells[1, 3].Font.Size = 13;
+            ExcelApp.Cells[1, 1].Font.Bold = true;
+            ExcelApp.Cells[1, 1].Font.Size = 13;
 
             for (int i = 1; i <= 9; i++)
             {
@@ -344,6 +314,136 @@ namespace LabyDB
             dataAdapter.Fill(ds);
             dataGridView1.DataSource = ds.Tables[0];
             connection.Close();
+        }
+
+        //Увеличен тариф за электроэнергию
+        private void Dick()
+        {
+            SqlCommand command = new SqlCommand("Update Payments set Tariff=Tariff+@Tariff Where ID = ID", connection);
+
+            dataGridView1.DataSource = null;
+            dataSet.Clear();
+            connection.Open();
+
+            command.Parameters.AddWithValue("@Tariff", Convert.ToInt32(textBox1.Text));
+
+            dataAdapter.SelectCommand = command;
+            dataAdapter.Fill(dataSet);
+            dataGridView1.DataSource = dataSet.Tables[0];
+            connection.Close();
+
+            DatabaseUpdate();
+        }
+        //Увеличен тариф за электроэнергию кнопка
+        private void button19_Click(object sender, EventArgs e)
+        {
+            Dick();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            PaymentsFormEdeting form = new PaymentsFormEdeting();
+            form.Show();
+            this.Close();
+        }
+
+        private void button8_Click_1(object sender, EventArgs e)
+        {
+            DatabaseUpdate();
+            Program.DeleteEmptyColumns(dataGridView1);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Ochko2();
+
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            //Создаем рабочую книгу:
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            //Нам доступно редактирование некоторых параметров, в качестве примера изменим ширину столбцов:
+            ExcelApp.Columns.ColumnWidth = 15;
+            //Задать значение ячейки можно так:
+            ExcelApp.Range[ExcelApp.Cells[1, 1], ExcelApp.Cells[1, 2]].Merge();
+            ExcelApp.Cells[1, 1] = "Отчетная ведомость группировка тариф:";
+            ExcelApp.Cells[2, 1] = "Тариф";
+            ExcelApp.Cells[2, 2] = "Кол-во абонентов";
+
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 3, 6]].Merge();
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 4, 6]].Merge();
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо – “Павел Хасай";
+            ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.RowCount - 1; j++)
+                {
+                    ExcelApp.Cells[j + 3, i + 1] = (dataGridView1[i, j].Value).ToString();
+                }
+            }
+
+
+            ExcelApp.Cells[1, 1].Font.Bold = true;
+            ExcelApp.Cells[1, 1].Font.Size = 13;
+
+            for (int i = 1; i <= 9; i++)
+            {
+                ExcelApp.Cells[2, i].Font.Bold = true;
+                ExcelApp.Cells[2, i].Font.Size = 12;
+            }
+
+            ExcelApp.Columns.AutoFit();
+            ExcelApp.Visible = true;
+
+            DatabaseUpdate();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Ochko3();
+
+            Microsoft.Office.Interop.Excel.Application ExcelApp = new Microsoft.Office.Interop.Excel.Application();
+            //Создаем рабочую книгу:
+            ExcelApp.Application.Workbooks.Add(Type.Missing);
+            //Нам доступно редактирование некоторых параметров, в качестве примера изменим ширину столбцов:
+            ExcelApp.Columns.ColumnWidth = 15;
+            //Задать значение ячейки можно так:
+            ExcelApp.Range[ExcelApp.Cells[1, 1], ExcelApp.Cells[1, 6]].Merge();
+            ExcelApp.Cells[1, 1] = "Отчетная ведомость группировка тариф:";
+            ExcelApp.Cells[2, 1] = "Лицевой счет";
+            ExcelApp.Cells[2, 2] = "Месяц оплаты";
+            ExcelApp.Cells[2, 3] = "Тариф";
+            ExcelApp.Cells[2, 4] = "Кол-во киловат";
+            ExcelApp.Cells[2, 5] = "ФИО";
+            ExcelApp.Cells[2, 6] = "Адрес";
+
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 3, 6]].Merge();
+            ExcelApp.Range[ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1], ExcelApp.Cells[dataGridView1.Rows.Count + 4, 6]].Merge();
+            ExcelApp.Cells[dataGridView1.Rows.Count + 3, 1] = "Отвественное лицо – “Павел Хасай";
+            ExcelApp.Cells[dataGridView1.Rows.Count + 4, 1] = "Дата выдачи отчета - " + DateTime.Now;
+
+
+            for (int i = 0; i < dataGridView1.ColumnCount; i++)
+            {
+                for (int j = 0; j < dataGridView1.RowCount - 1; j++)
+                {
+                    ExcelApp.Cells[j + 3, i + 1] = (dataGridView1[i, j].Value).ToString();
+                }
+            }
+
+
+            ExcelApp.Cells[1, 1].Font.Bold = true;
+            ExcelApp.Cells[1, 1].Font.Size = 13;
+
+            for (int i = 1; i <= 9; i++)
+            {
+                ExcelApp.Cells[2, i].Font.Bold = true;
+                ExcelApp.Cells[2, i].Font.Size = 12;
+            }
+
+            ExcelApp.Columns.AutoFit();
+            ExcelApp.Visible = true;
+
+            DatabaseUpdate();
         }
     }
 }

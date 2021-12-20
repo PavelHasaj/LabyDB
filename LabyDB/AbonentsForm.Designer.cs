@@ -133,7 +133,7 @@ namespace LabyDB {
             // button6
             // 
             this.button6.BackColor = System.Drawing.SystemColors.Window;
-            this.button6.Location = new System.Drawing.Point(713, 501);
+            this.button6.Location = new System.Drawing.Point(713, 555);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 7;
@@ -144,7 +144,7 @@ namespace LabyDB {
             // button5
             // 
             this.button5.BackColor = System.Drawing.SystemColors.Window;
-            this.button5.Location = new System.Drawing.Point(632, 501);
+            this.button5.Location = new System.Drawing.Point(632, 555);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 8;
@@ -176,7 +176,7 @@ namespace LabyDB {
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(426, 536);
+            this.dataGridView1.Size = new System.Drawing.Size(426, 590);
             this.dataGridView1.TabIndex = 23;
             // 
             // textBox4
@@ -216,7 +216,7 @@ namespace LabyDB {
             // button9
             // 
             this.button9.BackColor = System.Drawing.SystemColors.Window;
-            this.button9.Location = new System.Drawing.Point(542, 501);
+            this.button9.Location = new System.Drawing.Point(542, 555);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(84, 23);
             this.button9.TabIndex = 27;
@@ -251,7 +251,7 @@ namespace LabyDB {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(800, 536);
+            this.ClientSize = new System.Drawing.Size(800, 590);
             this.Controls.Add(this.button17);
             this.Controls.Add(this.button16);
             this.Controls.Add(this.button9);

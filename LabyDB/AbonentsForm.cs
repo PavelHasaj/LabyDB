@@ -86,13 +86,19 @@ namespace LabyDB {
         }
 
         private void data_delete_button(object sender, EventArgs e) {
-            DataDelete();
+            DialogResult result = MessageBox.Show("Вы уверены?", "Подтвердите удаление", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                DataDelete();
+            }
+            
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Program.paymentsForm.Show();
-            this.Hide();
+            PaymentsForm form = new PaymentsForm();
+            form.Show();
+            this.Close();
         }
 
         private void button8_Click(object sender, EventArgs e)

@@ -10,8 +10,6 @@ namespace LabyDB {
         /// Главная точка входа для приложения.
         /// </summary>
         public static MainForm mainForm = new MainForm();
-        public static AbonentsForm abonentsForm = new AbonentsForm();
-        public static PaymentsForm paymentsForm = new PaymentsForm();
 
         [STAThread]
         static void Main() {
